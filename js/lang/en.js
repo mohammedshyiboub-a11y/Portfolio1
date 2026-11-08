@@ -79,7 +79,12 @@ window.LANG.en = {
     "subj": "Portfolio message from ",
     "av": "Available for UI/UX opportunities",
     "pAll": "View all work on Behance",
-    "foot": "© 2026 Mohamed Shyiboub Ahmed"
+    "foot": "© 2026 Mohamed Shyiboub Ahmed (Mohammed Shyiboub · محمد شيبوب)",
+    "thL": "Switch to light mode",
+    "thD": "Switch to dark mode",
+    "altPhoto": "Mohamed Shyiboub Ahmed, UI/UX designer",
+    "altP1": "Mazaq food delivery app UI/UX screens",
+    "altP2": "Skillo e-learning app UI/UX screens"
   },
   /* ---------- END: interface texts ---------- */
 

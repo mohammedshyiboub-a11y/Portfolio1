@@ -1,0 +1,28 @@
+{
+  "_help": "Edit this file, then run: node build.js   (it regenerates index.html, ar/index.html, sitemap.xml and robots.txt)",
+  "siteUrl": "https://YOUR-DOMAIN.com",
+  "sameAs": [
+    "https://www.linkedin.com/in/mohammed-shyiboub-hedhed",
+    "https://www.behance.net/mohammeshyibou"
+  ],
+  "alternateNames": [
+    "Mohamed Shyiboub",
+    "Mohammed Shyiboub",
+    "Mohammed Shyiboub Ahmed",
+    "محمد شيبوب",
+    "محمد شيبوب أحمد",
+    "محمد شيبوب احمد"
+  ],
+  "en": {
+    "title": "Mohamed Shyiboub Ahmed – UI/UX Designer | Portfolio",
+    "description": "Portfolio of Mohamed Shyiboub Ahmed (Mohammed Shyiboub), UI/UX designer from Egypt. Mobile app case studies, Figma prototypes, Front-End and Flutter skills.",
+    "ogLocale": "en_US",
+    "siteName": "Mohamed Shyiboub Ahmed – Portfolio"
+  },
+  "ar": {
+    "title": "محمد شيبوب أحمد – مصمم UI/UX | معرض الأعمال",
+    "description": "معرض أعمال محمد شيبوب أحمد (Mohamed Shyiboub)، مصمم UI/UX من مصر. دراسات حالة لتطبيقات الموبايل، نماذج Figma الأولية، وخبرة في Front-End وFlutter.",
+    "ogLocale": "ar_EG",
+    "siteName": "محمد شيبوب أحمد – معرض الأعمال"
+  }
+}

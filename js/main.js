@@ -7,12 +7,46 @@
 
 /* ---------- START: 1. Global state & helpers ----------
    "calm" = visitor asked the OS for reduced motion (animations get skipped).
-   "L" = current language code ("en" or "ar"), restored from localStorage. */
+   "L" = current language code ("en" or "ar"). Each language has its own page (/ and /ar/),
+   so the language is read from <html lang> that the build step wrote. */
 var calm = matchMedia("(prefers-reduced-motion:reduce)").matches;
-var L = "en";
-try { L = localStorage.getItem("lang") || "en"; } catch (e) {}
+var L = document.documentElement.lang == "ar" ? "ar" : "en";
 if (!window.LANG[L]) L = "en";
 /* ---------- END: 1. Global state & helpers ---------- */
+
+
+/* ---------- START: 1b. Theme (dark by default, light on request) ----------
+   index.html sets data-theme on <html> before first paint (dark unless the visitor chose light).
+   setTheme() flips it, remembers the choice, updates the browser UI colour and the particle colours. */
+var pal = {};
+function readPal() {
+  var cs = getComputedStyle(document.documentElement), g = function (k) { return cs.getPropertyValue(k).trim(); };
+  var light = document.documentElement.getAttribute("data-theme") == "light";
+  pal = light
+    ? { dot: "rgba(37,99,235,.55)", line: "37,99,235", mouse: "109,91,255", lineA: .22, mouseA: .5 }
+    : { dot: "rgba(140,170,255,.7)", line: "110,150,255", mouse: "139,124,255", lineA: .28, mouseA: .6 };
+  var meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute("content", g("--bg"));
+}
+function setTheme(t, save) {
+  var root = document.documentElement;
+  if (!calm) { root.classList.add("theme-anim"); setTimeout(function () { root.classList.remove("theme-anim"); }, 450); }
+  root.setAttribute("data-theme", t);
+  if (save) { try { localStorage.setItem("theme", t); } catch (e) {} }
+  readPal();
+  themeLabel();
+}
+function themeLabel() {
+  var b = document.getElementById("theme"), light = document.documentElement.getAttribute("data-theme") == "light", d = LANG[L].ui;
+  if (!b) return;
+  b.setAttribute("aria-label", light ? d.thD : d.thL);
+  b.title = light ? d.thD : d.thL;
+}
+document.getElementById("theme").onclick = function () {
+  setTheme(document.documentElement.getAttribute("data-theme") == "light" ? "dark" : "light", true);
+};
+readPal();
+/* ---------- END: 1b. Theme ---------- */
 
 
 /* ---------- START: 2. Contact form (opens the visitor's mail app) ----------
@@ -80,9 +114,7 @@ function render() {
     n.innerHTML = D.projectTags[+n.dataset.t].map(function (x) { return "<span>" + x + "</span>"; }).join("");
   });
 
-  /* language button shows the OTHER language; page title follows the language */
-  document.getElementById("lang").textContent = rtl ? "English" : "عربي";
-  document.title = d.name + (rtl ? " – مصمم UI/UX" : " – UI/UX Designer");
+  themeLabel(); /* theme button label in the current language */
 
   watch();     /* re-attach scroll reveal to the new elements */
   bindNums();  /* re-attach number counters */
@@ -112,15 +144,15 @@ function watch() {
 /* ---------- END: 5. Reveal on scroll ---------- */
 
 
-/* ---------- START: 6. Language switch button ----------
-   Toggles English <-> Arabic, remembers the choice and re-renders the page. */
-document.getElementById("lang").onclick = function () {
-  L = L == "en" ? "ar" : "en";
-  try { localStorage.setItem("lang", L); } catch (e) {}
-  render();
-  tick(); /* refresh the rotating hero line in the new language */
-};
-/* ---------- END: 6. Language switch button ---------- */
+/* ---------- START: 6. Language switch link ----------
+   #lang is a normal link to the other language's page (/ <-> /ar/) so search engines can follow it.
+   JS only adds the current #section to it so the visitor stays where they were. */
+document.getElementById("lang").addEventListener("click", function (e) {
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+  e.preventDefault();
+  location.href = this.getAttribute("href") + location.hash;
+});
+/* ---------- END: 6. Language switch link ---------- */
 
 
 /* ---------- START: 7. Mobile menu ----------
@@ -349,14 +381,14 @@ bindNums();
       if (dd < 14000) { var f = (1 - dd / 14000) * .8; a.x += dx * f * .05; a.y += dy * f * .05; }
 
       /* the dot */
-      cx.fillStyle = "rgba(140,170,255,.7)";
+      cx.fillStyle = pal.dot;
       cx.beginPath(); cx.arc(a.x, a.y, a.r, 0, 6.283); cx.fill();
 
       /* lines to nearby dots */
       for (var j = i + 1; j < P.length; j++) {
         var b = P[j], x = a.x - b.x, y = a.y - b.y, d2 = x * x + y * y;
         if (d2 < 11000) {
-          cx.strokeStyle = "rgba(110,150,255," + (1 - d2 / 11000) * .28 + ")";
+          cx.strokeStyle = "rgba(" + pal.line + "," + (1 - d2 / 11000) * pal.lineA + ")";
           cx.lineWidth = 1;
           cx.beginPath(); cx.moveTo(a.x, a.y); cx.lineTo(b.x, b.y); cx.stroke();
         }
@@ -365,7 +397,7 @@ bindNums();
       /* line to the mouse */
       var mdx = a.x - mx, mdy = a.y - my, md = mdx * mdx + mdy * mdy;
       if (md < 26000) {
-        cx.strokeStyle = "rgba(139,124,255," + (1 - md / 26000) * .6 + ")";
+        cx.strokeStyle = "rgba(" + pal.mouse + "," + (1 - md / 26000) * pal.mouseA + ")";
         cx.beginPath(); cx.moveTo(a.x, a.y); cx.lineTo(mx, my); cx.stroke();
       }
     }

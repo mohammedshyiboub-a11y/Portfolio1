@@ -6,11 +6,17 @@
 
 /* ---------- START: 1. Design tokens, reset & base typography ----------
    Colour variables (:root), box-sizing reset, page background, fonts, links, headings and the .wrap container. */
-:root{--bg:#0B0D12;--bg2:#11151D;--card:#161B25;--a:#4F8CFF;--a2:#8B7CFF;--tx:#F5F7FA;--tx2:#9BA4B5;--bd:#252D3A;--r:10px;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--bg:#0B0D12;--bg2:#11151D;--card:#161B25;--a:#4F8CFF;--a2:#8B7CFF;--tx:#F5F7FA;--tx2:#9BA4B5;--bd:#252D3A;--r:10px;
+ --on-a:#07111f;--a-hover:#6a9dff;--a-soft:#8fb4ff;--hdr:rgba(11,13,18,.82);--hdr2:rgba(11,13,18,.92);--glass:rgba(22,27,37,.88);--glass2:rgba(22,27,37,.72);--curt:#080a0f;--orb:.28;--ph-sh:0 24px 60px -20px rgba(0,0,0,.6);--fl-sh:0 8px 30px rgba(0,0,0,.35);
+ color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+/* Light theme: only the tokens change. Dark is the default (no attribute = dark). */
+:root[data-theme=light]{--bg:#F6F8FC;--bg2:#EBEFF6;--card:#FFFFFF;--a:#2563EB;--a2:#6D5BFF;--tx:#0E1320;--tx2:#4A5568;--bd:#D8DEE9;
+ --on-a:#FFFFFF;--a-hover:#1D4ED8;--a-soft:#1D4ED8;--hdr:rgba(246,248,252,.85);--hdr2:rgba(246,248,252,.94);--glass:rgba(255,255,255,.9);--glass2:rgba(255,255,255,.8);--curt:#F6F8FC;--orb:.16;--ph-sh:0 24px 60px -24px rgba(30,45,90,.35);--fl-sh:0 8px 26px rgba(30,45,90,.14);
+ color-scheme:light}
 *,*::before,*::after{box-sizing:inherit}
 html{height:100%;scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
 body{margin:0;min-height:100%;background:var(--bg);color:var(--tx);font:400 16px/1.7 Inter,"IBM Plex Sans Arabic",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(11,13,18,.92);z-index:60}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hdr2);z-index:60}
 [dir=rtl] body,[dir=rtl] button{font-family:"IBM Plex Sans Arabic",Inter,system-ui,sans-serif}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--a);outline-offset:3px;border-radius:4px}
@@ -22,18 +28,18 @@ p{margin:0}
 
 /* ---------- START: 2. Header, navigation & buttons ----------
    Sticky top bar, logo, nav links, language/menu buttons and the shared .btn styles. */
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(11,13,18,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--hdr);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
 .logo{font:700 18px "Space Grotesk",sans-serif;display:flex;align-items:center;gap:10px}
-.logo i{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--a),var(--a2));display:grid;place-items:center;font:700 13px Inter,sans-serif;font-style:normal;color:#08101f}
+.logo i{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--a),var(--a2));display:grid;place-items:center;font:700 13px Inter,sans-serif;font-style:normal;color:var(--on-a)}
 .links{display:flex;gap:4px;list-style:none;margin:0;padding:0}
 .links a{position:relative;display:block;padding:8px 12px;border-radius:8px;color:var(--tx2);font-size:14px;font-weight:500;transition:color .2s,background .2s}
 .links a:hover,.links a.on{color:var(--tx);background:var(--card)}
 .tools{display:flex;gap:8px;align-items:center}
 .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:9px 16px;border-radius:8px;font:500 14px inherit;cursor:pointer;transition:border-color .2s,transform .2s,background .2s}
 .btn:hover{border-color:var(--a)}
-.btn.pri{background:var(--a);border-color:var(--a);color:#07111f;font-weight:600}
-.btn.pri:hover{background:#6a9dff;box-shadow:0 0 24px rgba(79,140,255,.35)}
+.btn.pri{background:var(--a);border-color:var(--a);color:var(--on-a);font-weight:600}
+.btn.pri:hover{background:var(--a-hover);box-shadow:0 0 24px rgba(79,140,255,.35)}
 #menu{display:none}
 /* ---------- END: 2. Header, navigation & buttons ---------- */
 
@@ -44,7 +50,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rg
 .sel{position:relative;display:inline-block;padding:18px 22px;border:1px solid var(--a);margin-inline-start:-22px}
 .sel b{position:absolute;width:9px;height:9px;background:var(--bg);border:1.5px solid var(--a)}
 .sel b:nth-child(1){top:-5px;left:-5px}.sel b:nth-child(2){top:-5px;right:-5px}.sel b:nth-child(3){bottom:-5px;left:-5px}.sel b:nth-child(4){bottom:-5px;right:-5px}
-.sel em{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:10px;background:var(--a);color:#07111f;font:600 11px Inter,sans-serif;font-style:normal;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.sel em{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:10px;background:var(--a);color:var(--on-a);font:600 11px Inter,sans-serif;font-style:normal;padding:2px 8px;border-radius:4px;white-space:nowrap}
 .hero h1{font-size:clamp(38px,6.2vw,68px);font-weight:700}
 .role{margin-top:44px;font:500 clamp(19px,2.4vw,26px) "Space Grotesk","IBM Plex Sans Arabic",sans-serif;color:var(--a)}
 .lead{margin-top:16px;color:var(--tx2);max-width:560px;font-size:17px}
@@ -128,7 +134,7 @@ footer{padding:28px 0;border-top:1px solid var(--bd);color:var(--tx2);font-size:
    Top progress bar, hero layer order, blurred background orbs and the 'drift' animation. */
 #bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:2px;z-index:70;background:linear-gradient(90deg,var(--a),var(--a2));transform-origin:0 50%;transform:scaleX(0)}
 .hgrid{position:relative;z-index:1}
-.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.28;pointer-events:none;animation:drift 14s ease-in-out infinite alternate}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:var(--orb);pointer-events:none;animation:drift 14s ease-in-out infinite alternate}
 .o1{width:380px;height:380px;background:var(--a);top:-100px;right:-80px}.o2{width:320px;height:320px;background:var(--a2);bottom:-120px;left:8%;animation-duration:19s}
 @keyframes drift{to{transform:translate(-70px,60px) scale(1.18)}}
 /* ---------- END: 10. Scroll progress bar, hero grid & floating orbs ---------- */
@@ -167,7 +173,7 @@ footer{padding:28px 0;border-top:1px solid var(--bd);color:var(--tx2);font-size:
 .tl::before{transform-origin:top;transform:scaleY(0);transition:transform 1.8s ease}.tl.in::before{transform:none}
 .shot{display:block;position:relative;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--bd);background:#000}
 .shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.3s cubic-bezier(.2,.7,.2,1)}.proj .card:hover .shot img{transform:scale(1.08)}
-.vw{position:absolute;inset-inline-end:14px;bottom:14px;background:var(--a);color:#07111f;font:600 13px Inter,"IBM Plex Sans Arabic",sans-serif;padding:6px 13px;border-radius:7px;opacity:0;transform:translateY(8px);transition:.35s}.shot:hover .vw{opacity:1;transform:none}
+.vw{position:absolute;inset-inline-end:14px;bottom:14px;background:var(--a);color:var(--on-a);font:600 13px Inter,"IBM Plex Sans Arabic",sans-serif;padding:6px 13px;border-radius:7px;opacity:0;transform:translateY(8px);transition:.35s}.shot:hover .vw{opacity:1;transform:none}
 .proj .card.in{transition:transform .18s ease-out,border-color .25s}
 @media(max-width:560px){.stats{gap:10px}.stats div{padding-inline-start:10px}}
 /* ---------- END: 13. Stats counters, hover effects & project images ---------- */
@@ -194,7 +200,7 @@ footer{padding:28px 0;border-top:1px solid var(--bd);color:var(--tx2);font-size:
    Animated heading gradient, heading underline, cursor glow, button sweep, icon pulse, opening curtain. */
 #fx{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .hero .wrap{position:relative;z-index:1}
-.hero h1{background:linear-gradient(100deg,var(--tx) 20%,#7fb0ff 40%,var(--a2) 55%,var(--tx) 75%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:up .9s .35s cubic-bezier(.2,.7,.2,1) both,shine 6s 1.4s linear infinite}
+.hero h1{background:linear-gradient(100deg,var(--tx) 20%,var(--a-soft) 40%,var(--a2) 55%,var(--tx) 75%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:up .9s .35s cubic-bezier(.2,.7,.2,1) both,shine 6s 1.4s linear infinite}
 @keyframes shine{to{background-position:-250% 0}}
 .cur{position:fixed;left:0;top:0;width:340px;height:340px;margin:-170px 0 0 -170px;border-radius:50%;background:radial-gradient(circle,rgba(79,140,255,.16),rgba(139,124,255,.07) 45%,transparent 70%);pointer-events:none;z-index:0;opacity:0;transition:opacity .4s;will-change:transform}
 .cur.on{opacity:1}
@@ -209,8 +215,8 @@ footer{padding:28px 0;border-top:1px solid var(--bd);color:var(--tx2);font-size:
 .ic{animation:pulse 3.2s ease-in-out infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(79,140,255,.0)}50%{box-shadow:0 0 0 8px rgba(79,140,255,.12)}}
 .curtain{position:fixed;inset:0;z-index:999;pointer-events:none;display:flex;flex-direction:column}
-.curtain i{flex:1;background:#080a0f;transition:transform 1s cubic-bezier(.77,0,.18,1)}
-.curtain b{position:absolute;inset:0;display:grid;place-items:center;font:700 clamp(28px,6vw,56px)/1 "Space Grotesk",sans-serif;letter-spacing:.04em;background:linear-gradient(100deg,#fff,var(--a),var(--a2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;transition:opacity .45s,transform .6s;animation:fade .5s both}
+.curtain i{flex:1;background:var(--curt);transition:transform 1s cubic-bezier(.77,0,.18,1)}
+.curtain b{position:absolute;inset:0;display:grid;place-items:center;font:700 clamp(28px,6vw,56px)/1 "Space Grotesk",sans-serif;letter-spacing:.04em;background:linear-gradient(100deg,var(--tx),var(--a),var(--a2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;transition:opacity .45s,transform .6s;animation:fade .5s both}
 .curtain.go i:first-child{transform:translateY(-101%)}.curtain.go i:last-child{transform:translateY(101%)}
 .curtain.go b{opacity:0;transform:scale(1.15)}
 @media(pointer:coarse){.cur{display:none}}
@@ -237,13 +243,13 @@ footer{padding:28px 0;border-top:1px solid var(--bd);color:var(--tx2);font-size:
 @keyframes ph{from{opacity:0;transform:translateY(16px)}}
 .photo::before{content:"";position:absolute;inset:-14px;border:1px solid rgba(139,150,255,.22);border-radius:22px;transform:rotate(2.5deg);z-index:1;pointer-events:none;animation:bob 4.5s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:rotate(2.5deg) translateY(12px)}50%{transform:rotate(2.5deg) translateY(-16px)}}
-.photo img{position:relative;z-index:2;display:block;width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 20%;border-radius:20px;border:1px solid var(--bd);box-shadow:0 24px 60px -20px rgba(0,0,0,.6)}
+.photo img{position:relative;z-index:2;display:block;width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 20%;border-radius:20px;border:1px solid var(--bd);box-shadow:var(--ph-sh)}
 .aura{position:absolute;inset:0;z-index:0;pointer-events:none}
 .aura i{position:absolute;border-radius:50%;filter:blur(46px)}
 .aura .g1{width:70%;height:70%;left:-18%;top:-14%;background:var(--a);opacity:.34;animation:breathe 7s ease-in-out infinite}
 .aura .g2{width:64%;height:64%;right:-16%;bottom:-14%;background:var(--a2);opacity:.34;animation:breathe 9s -3s ease-in-out infinite}
 @keyframes breathe{0%,100%{transform:translateY(26px) scale(.95);opacity:.25}50%{transform:translateY(-30px) scale(1.12);opacity:.5}}
-.fl{position:absolute;z-index:3;padding:6px 14px;background:rgba(22,27,37,.88);border:1px solid var(--bd);border-radius:10px;font-size:13px;font-weight:500;backdrop-filter:blur(8px);box-shadow:0 8px 30px rgba(0,0,0,.35);animation:flt 3.6s ease-in-out infinite alternate}
+.fl{position:absolute;z-index:3;padding:6px 14px;background:var(--glass);border:1px solid var(--bd);border-radius:10px;font-size:13px;font-weight:500;backdrop-filter:blur(8px);box-shadow:var(--fl-sh);animation:flt 3.6s ease-in-out infinite alternate}
 @keyframes flt{from{transform:translateY(6px)}to{transform:translateY(-12px)}}
 @media(max-width:560px){.photo::before{inset:-10px}.fl{font-size:12px;padding:5px 11px}}
 @media(prefers-reduced-motion:reduce){.aura i,.fl,.photo::before{animation:none!important}}
@@ -276,7 +282,7 @@ footer{padding:28px 0;border-top:1px solid var(--bd);color:var(--tx2);font-size:
    pill tags on project cards and the "View all work on Behance" link. */
 
 /* availability badge */
-.avail{display:inline-flex;align-items:center;gap:10px;padding:7px 16px;margin-bottom:30px;border:1px solid var(--bd);border-radius:999px;background:rgba(22,27,37,.72);backdrop-filter:blur(8px);color:var(--tx);font-size:14px;font-weight:500;line-height:1.4;animation:up .8s .05s cubic-bezier(.2,.7,.2,1) both}
+.avail{display:inline-flex;align-items:center;gap:10px;padding:7px 16px;margin-bottom:30px;border:1px solid var(--bd);border-radius:999px;background:var(--glass2);backdrop-filter:blur(8px);color:var(--tx);font-size:14px;font-weight:500;line-height:1.4;animation:up .8s .05s cubic-bezier(.2,.7,.2,1) both}
 .avail i{position:relative;flex:none;width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 10px rgba(52,211,153,.7)}
 .avail i::after{content:"";position:absolute;inset:0;border-radius:50%;background:#34d399;animation:ping 1.9s cubic-bezier(0,0,.2,1) infinite}
 @keyframes ping{75%,100%{transform:scale(3);opacity:0}}
@@ -290,7 +296,7 @@ footer{padding:28px 0;border-top:1px solid var(--bd);color:var(--tx2);font-size:
 
 /* project tags */
 .pt{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
-.pt span{padding:4px 13px;border:1px solid rgba(79,140,255,.28);border-radius:999px;background:rgba(79,140,255,.12);color:#8fb4ff;font-size:13px;font-weight:500;line-height:1.5;opacity:0;transform:scale(.7) translateY(6px);transition:background .2s,color .2s,border-color .2s}
+.pt span{padding:4px 13px;border:1px solid rgba(79,140,255,.28);border-radius:999px;background:rgba(79,140,255,.12);color:var(--a-soft);font-size:13px;font-weight:500;line-height:1.5;opacity:0;transform:scale(.7) translateY(6px);transition:background .2s,color .2s,border-color .2s}
 .card.in .pt span{animation:chipin .55s cubic-bezier(.2,.9,.3,1.3) forwards}
 .pt span:nth-child(1){animation-delay:.35s!important}.pt span:nth-child(2){animation-delay:.43s!important}.pt span:nth-child(3){animation-delay:.51s!important}.pt span:nth-child(4){animation-delay:.59s!important}
 .pt span:hover{background:rgba(79,140,255,.22);border-color:var(--a);color:var(--tx)}
@@ -310,3 +316,16 @@ footer{padding:28px 0;border-top:1px solid var(--bd);color:var(--tx2);font-size:
 
 @media(max-width:560px){.avail{font-size:13px;padding:6px 14px;margin-bottom:24px}.allw{margin-top:32px}}
 /* ---------- END: 21. Availability badge, section numbers, project tags & Behance link ---------- */
+
+/* ---------- START: 22. Theme toggle (dark default / light) ----------
+   Icon button in the header. Shows the sun while in dark mode (click = go light) and the moon in light mode.
+   .theme-anim is added for ~0.4s while switching so colours fade instead of snapping. */
+.btn.ico{padding:9px 11px;line-height:0}
+.btn.ico svg{width:18px;height:18px;display:block}
+#theme .i-moon{display:none}
+:root[data-theme=light] #theme .i-sun{display:none}
+:root[data-theme=light] #theme .i-moon{display:block}
+#lang{font-size:14px;font-weight:500;font-family:Inter,"IBM Plex Sans Arabic",system-ui,sans-serif}
+[dir=rtl] #lang{font-family:"IBM Plex Sans Arabic",Inter,system-ui,sans-serif}
+html.theme-anim *,html.theme-anim *::before,html.theme-anim *::after{transition:background-color .35s ease,border-color .35s ease,color .35s ease,fill .35s ease,stroke .35s ease,box-shadow .35s ease!important}
+/* ---------- END: 22. Theme toggle ---------- */
