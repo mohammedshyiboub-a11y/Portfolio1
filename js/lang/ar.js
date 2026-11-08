@@ -77,6 +77,8 @@ window.LANG.ar = {
     "fS": "إرسال الرسالة",
     "fOk": "جارٍ فتح تطبيق البريد. إذا لم يُفتح، راسلني مباشرة على mohammedshyiboub@gmail.com.",
     "subj": "رسالة من موقع البورتفوليو: ",
+    "av": "متاح لفرص \u2066UI/UX\u2069",
+    "pAll": "شاهد كل الأعمال على Behance",
     "foot": "© 2026 محمد شيبوب أحمد"
   },
   /* ---------- END: interface texts ---------- */
@@ -188,6 +190,13 @@ window.LANG.ar = {
   /* ---------- END: skills groups ---------- */
 
   /* ---------- START: rotating lines under the hero role ---------- */
+  /* ---------- START: project tags (pills above each project title) ---------- */
+  projectTags: [
+    ["تطبيق موبايل", "دراسة حالة", "\u2066UI/UX\u2069", "توصيل طعام"],
+    ["تطبيق موبايل", "دراسة حالة", "\u2066UI/UX\u2069", "تعلّم إلكتروني"]
+  ],
+  /* ---------- END: project tags ---------- */
+
   rotating: [
     "أبحاث المستخدمين",
     "هياكل سلكية ونماذج أولية",

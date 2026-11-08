@@ -77,6 +77,8 @@ window.LANG.en = {
     "fS": "Send message",
     "fOk": "Opening your mail app. If it doesn’t open, email me directly at mohammedshyiboub@gmail.com.",
     "subj": "Portfolio message from ",
+    "av": "Available for UI/UX opportunities",
+    "pAll": "View all work on Behance",
     "foot": "© 2026 Mohamed Shyiboub Ahmed"
   },
   /* ---------- END: interface texts ---------- */
@@ -188,6 +190,13 @@ window.LANG.en = {
   /* ---------- END: skills groups ---------- */
 
   /* ---------- START: rotating lines under the hero role ---------- */
+  /* ---------- START: project tags (pills above each project title) ---------- */
+  projectTags: [
+    ["Mobile app", "Case study", "UI/UX", "Food delivery"],
+    ["Mobile app", "Case study", "UI/UX", "E-learning"]
+  ],
+  /* ---------- END: project tags ---------- */
+
   rotating: [
     "User research",
     "Wireframes & prototypes",
