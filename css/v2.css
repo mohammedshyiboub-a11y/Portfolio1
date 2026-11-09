@@ -411,3 +411,27 @@ header .wrap.nav{width:min(1180px,calc(100% - 32px));max-width:none;margin-inlin
 .vw,.tag,.sel em,.svb,.tip,.fl,.photo .fl{border-radius:999px}
 .skc span,.chips span,.mt span,.pt span,.svt span{border-radius:999px}
 .logo img,:root[data-theme=light] .logo img{border-radius:0}
+
+/* ---------- Circular profile photo + animated backdrop ---------- */
+.photo img{border-radius:50%;border:3px solid var(--bd);object-position:50% 18%}
+.photo::before{inset:-18px;border-radius:50%;border:1px dashed rgba(139,150,255,.38);transform:none;animation:none}
+.photo::after{inset:-8px;border-radius:50%}
+.rings,.orbit{position:absolute;pointer-events:none;border-radius:50%}
+.rings{inset:0;z-index:0}
+.rings b{position:absolute;inset:0;border-radius:50%;border:2px solid var(--a);opacity:0}
+.orbit{inset:-36px;z-index:1}
+.orbit i{position:absolute;width:11px;height:11px;margin:-5.5px;border-radius:50%;background:var(--a);box-shadow:0 0 16px var(--a)}
+.orbit i:nth-child(1){top:0;left:50%}
+.orbit i:nth-child(2){bottom:0;left:50%;background:var(--a2);box-shadow:0 0 16px var(--a2);width:8px;height:8px;margin:-4px}
+.orbit i:nth-child(3){top:50%;right:0;background:var(--c3,var(--a2));box-shadow:0 0 16px var(--c3,var(--a2))}
+@media(prefers-reduced-motion:no-preference){
+  .photo::before{animation:pspin 28s linear infinite reverse}
+  .orbit{animation:pspin 14s linear infinite}
+  .rings b{animation:pripple 5.4s cubic-bezier(.2,.6,.3,1) infinite}
+  .rings b:nth-child(2){animation-delay:1.8s}
+  .rings b:nth-child(3){animation-delay:3.6s}
+  .photo img{animation:pfloat 6s ease-in-out infinite}
+  @keyframes pspin{to{transform:rotate(360deg)}}
+  @keyframes pripple{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.6);opacity:0}}
+  @keyframes pfloat{50%{transform:translateY(-8px)}}
+}
