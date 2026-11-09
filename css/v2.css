@@ -124,109 +124,66 @@ section.alt{background:var(--bg2)}
 .ib{color:var(--a)}
 
 
-/* ---------- Mobile refinement: compact header and balanced spacing ---------- */
-@media (max-width: 860px) {
-  header { z-index: 80; }
-  .nav {
-    position: relative;
-    min-height: 66px;
-    height: auto;
-    padding-block: 9px;
-    gap: 8px;
-  }
-  .nav.wrap { padding-inline: 16px; }
-  .logo {
-    flex: 1 1 auto;
-    min-width: 0;
-    gap: 8px;
-    font-size: 16px;
-    line-height: 1.15;
-    white-space: nowrap;
-  }
-  .logo i { width: 30px; height: 30px; flex: 0 0 30px; font-size: 14px; }
-  .logo span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-  .tools { flex: 0 0 auto; gap: 6px; }
-  .tools .btn {
-    min-height: 40px;
-    padding: 8px 11px;
-    border-radius: 10px;
-    justify-content: center;
-    font-size: 13px;
-  }
-  .tools .btn.ico { width: 40px; min-width: 40px; padding: 0; }
-  #theme svg { width: 18px; height: 18px; }
-  #lang { min-width: 48px; }
-  #menu { display: inline-flex; width: 40px; min-width: 40px; padding: 0; font-size: 19px; }
-  .links {
-    top: 100%;
-    z-index: 90;
-    max-height: min(70vh, 460px);
-    overflow-y: auto;
-    gap: 4px;
-    padding: 10px 16px 14px;
-    border-radius: 0 0 14px 14px;
-    box-shadow: 0 16px 28px rgba(0,0,0,.24);
-  }
-  .links a { padding: 10px 12px; font-size: 14px; }
-  .hero { padding: 42px 0 52px; }
-  .hgrid { gap: 34px; }
-  .photo { width: min(78vw, 270px); max-width: 270px; justify-self: center; }
-  .hero h1 { font-size: clamp(34px, 9vw, 48px); line-height: 1.12; }
-  .role { margin-top: 24px; font-size: clamp(18px, 5vw, 22px); }
-  .lead { font-size: 15px; line-height: 1.8; }
-  .cta { margin-top: 24px; gap: 9px; }
-  section { padding: 54px 0; }
-  .wrap { padding-inline: 18px; }
-}
-@media (max-width: 380px) {
-  .nav.wrap { padding-inline: 12px; }
-  .logo { font-size: 14px; gap: 6px; }
-  .logo i { width: 27px; height: 27px; flex-basis: 27px; }
-  .tools { gap: 4px; }
-  .tools .btn { min-height: 36px; padding-inline: 8px; }
-  .tools .btn.ico, #menu { width: 36px; min-width: 36px; }
-  #lang { min-width: 44px; }
-  .wrap { padding-inline: 16px; }
-}
-@media (max-width: 340px) {
-  .logo { font-size: 13px; }
-  .logo i { width: 25px; height: 25px; flex-basis: 25px; }
-  #lang { min-width: 40px; font-size: 12px; }
-}
+/* =====================================================================
+   V3 layer: portfolio refinements (loaded last, so it wins over style.css and the layers above)
+   1) stronger hero CTA   2) organisation logos   3) large project cards
+   4) core skills + Technical Background section   5) gold 1st-place card   6) LinkedIn
+   ===================================================================== */
+:root[data-theme=dark]{--gold1:#FFD76A;--gold2:#F59E0B;--gold-bd:rgba(245,158,11,.75);--gold-bg:rgba(245,158,11,.16);--gold-ink:#2B1A00}
+:root[data-theme=light]{--gold1:#C26A06;--gold2:#9A4A07;--gold-bd:rgba(154,74,7,.6);--gold-bg:rgba(245,158,11,.16);--gold-ink:#FFFFFF}
 
-/* Keep the language and theme controls exactly the same height on mobile. */
-@media (max-width: 860px) {
-  .tools #theme,
-  .tools #lang {
-    box-sizing: border-box;
-    height: 40px;
-    min-height: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-  }
-  .tools #lang { padding: 0 12px; }
-}
-@media (max-width: 380px) {
-  .tools #theme,
-  .tools #lang {
-    height: 36px;
-    min-height: 36px;
-  }
-}
+/* ---------- 1) Hero CTA ---------- */
+.cta{gap:14px;align-items:center}
+.btn.big{padding:14px 24px;font-size:15px;border-radius:10px}
+.btn.pri.big{padding:16px 30px;font-size:16px;box-shadow:0 14px 34px -12px rgba(79,140,255,.7)}
+.btn.out{border-color:var(--a);color:var(--a)}
+.btn.out:hover{background:var(--a);color:var(--on-a)}
+.btn.ico.big{padding:14px 15px}
+.btn svg.ar{flex:none;transition:translate .3s}
+[dir=rtl] .btn svg.ar{transform:scaleX(-1)}
+.btn.pri.big:hover svg.ar{translate:5px 0}
+[dir=rtl] .btn.pri.big:hover svg.ar{translate:-5px 0}
 
-/* Match language and theme toggle heights on desktop as well. */
-@media (min-width: 861px) {
-  .tools #theme,
-  .tools #lang {
-    box-sizing: border-box;
-    height: 44px;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-  }
-  .tools #lang { padding: 0 16px; }
-}
+/* ---------- 2) Organisation logos on experience / course cards ---------- */
+.ch{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.ch .ct{min-width:0}
+.ch .meta{margin:4px 0 0}
+.lg{flex:none;width:44px;height:44px;border-radius:11px;display:block;object-fit:cover;border:1px solid var(--bd);background:var(--card)}
+.tl .card.hl::before{top:36px}
+
+/* ---------- 3) Large project cards: one per row, full-width screenshot on top ---------- */
+.proj{grid-template-columns:1fr;gap:40px}
+.proj .card{display:flex;flex-direction:column;padding:0;overflow:hidden}
+.proj .shot{aspect-ratio:16/9;border-bottom:1px solid var(--bd)}
+.proj .pb{padding:32px 36px 36px;gap:14px}
+.proj .pb h3{font-size:clamp(24px,3vw,34px)}
+.proj .pb p{font-size:16px;max-width:70ch}
+.proj .pb .btn{margin-top:8px}
+@media(hover:none){.vw{opacity:1;transform:none}}
+@media(max-width:860px){.proj{gap:28px}.proj .shot{aspect-ratio:16/10}.proj .pb{padding:22px 22px 26px}}
+
+/* ---------- 4) Skills: core tools stand out; Technical Background is quieter ---------- */
+.skc span.pr{border-color:var(--a);color:var(--tx);font-weight:600;background:linear-gradient(135deg,color-mix(in srgb,var(--a) 16%,var(--card)),var(--card))}
+#technical{padding:64px 0}
+.tk{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.tk .card h3{font-size:17px;margin-bottom:14px}
+.tk .skc{gap:10px}
+.tk .skc span{padding:6px 14px;font-size:14px}
+@media(max-width:860px){.tk{grid-template-columns:1fr}}
+
+/* ---------- 5) 1st place: gold card ---------- */
+.card.ach{gap:28px;padding:34px 36px;border:1px solid var(--gold-bd);background:linear-gradient(115deg,var(--gold-bg),var(--card) 62%);box-shadow:0 22px 50px -26px rgba(245,158,11,.6)}
+.card.ach:hover{border-color:var(--gold2)}
+.card.ach strong{font-size:clamp(64px,9vw,92px);background:linear-gradient(135deg,var(--gold1),var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.card.ach strong sup{-webkit-text-fill-color:transparent}
+.ach .eb{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;padding:3px 12px;border-radius:999px;background:linear-gradient(135deg,var(--gold1),var(--gold2));color:var(--gold-ink);font:700 12px Inter,"IBM Plex Sans Arabic",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+[dir=rtl] .ach .eb{letter-spacing:0}
+.card.ach h3{font-size:clamp(20px,2.6vw,26px)}
+.ach .gl{width:56px;height:56px;margin-inline-start:auto}
+@media(max-width:860px){.ach .gl{margin-inline-start:0}}
+
+/* ---------- 6) LinkedIn made obvious ---------- */
+.ib.li{width:96px;height:96px;background:#0A66C2;border-color:#0A66C2;color:#fff}
+.ib.li:hover,.ib.li:focus-visible{background:#0B7BE0;border-color:#0B7BE0}
+.cvw{gap:14px;flex-wrap:wrap}
+.btn.out.big{padding:16px 26px;font-size:16px}

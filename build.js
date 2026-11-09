@@ -39,15 +39,16 @@ const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 const url = { en: site + "/", ar: site + "/ar/" };
 
 /* ----- same markup as main.js (item / marquee / skills / tags) ----- */
-function item(x, L) {
+function item(x, L, base) {
   const hoursLabel = L === "ar" ? " ساعة" : " hours";
   const tag = x.hours ? `<span class="tag"><span class="cn" data-c="${x.hours}">${x.hours}</span>${hoursLabel}</span>` : "";
-  return `<div class="card rv${x.current ? " now" : ""}"><h3>${esc(x.title)}</h3><div class="meta"><span>${esc(x.org)}</span><span>${esc(x.date)}</span>${tag}</div><p>${esc(x.body)}</p></div>`;
+  const lg = x.logo ? `<img class="lg" src="${base}assets/logos/${x.logo}.svg" alt="" width="44" height="44" loading="lazy">` : "";
+  return `<div class="card rv${x.current ? " now" : ""}${x.logo ? " hl" : ""}"><div class="ch">${lg}<div class="ct"><h3>${esc(x.title)}</h3><div class="meta"><span>${esc(x.org)}</span><span>${esc(x.date)}</span>${tag}</div></div></div><p>${esc(x.body)}</p></div>`;
 }
 function seoHead(L) {
   const D = LANG[L], d = D.ui, c = cfg[L], other = L === "en" ? "ar" : "en";
   const img = site + "/assets/images/profile.jpg";
-  const knows = [].concat(D.skills[0].items, D.skills[1].items, D.skills[2].items);
+  const knows = [].concat(D.skills[0].items, D.tech[0].items, D.tech[1].items);
   const personId = url.en + "#person";
   const graph = [
     {
@@ -122,18 +123,20 @@ function page(L) {
   h = h.replace(/data-n="(\d+)"([^>]*)>0</g, 'data-n="$1"$2>$1<');
 
   /* lists that main.js also draws */
-  const chips = (a) => { const x = a.map((s) => `<span>${esc(s)}</span>`).join(""); return x + x + x + x; };
-  const row2 = D.skills[1].items.concat(D.skills[2].items, D.skills[3].items);
+  const chips = (a, n) => a.map((s) => `<span>${esc(s)}</span>`).join("").repeat(n || 4);
+  /* marquee: row 1 = design skills, row 2 = professional skills (technical skills have their own section) */
+  const row2 = D.skills[1].items;
   const fill = (id, html) => {
     const needle = `id="${id}"></div>`;
     if (!h.includes(needle)) throw new Error("Missing container #" + id);
     h = h.replace(needle, `id="${id}">${html}</div>`);
   };
   fill("m1", chips(D.skills[0].items));
-  fill("m2", chips(row2));
-  fill("tl", D.experience.map((x) => item(x, L)).join(""));
-  fill("courses", D.courses.map((x) => item(x, L)).join(""));
-  fill("sk", D.skills.map((g) => `<div class="skr rv"><h3>${esc(g.title)}</h3><div class="skc">${g.items.map((s) => `<span>${esc(s)}</span>`).join("")}</div></div>`).join(""));
+  fill("m2", chips(row2, 6));
+  fill("tl", D.experience.map((x) => item(x, L, base)).join(""));
+  fill("courses", D.courses.map((x) => item(x, L, base)).join(""));
+  fill("sk", D.skills.map((g) => `<div class="skr rv"><h3>${esc(g.title)}</h3><div class="skc">${g.items.map((s, i) => `<span${i < (g.core || 0) ? ' class="pr"' : ""}>${esc(s)}</span>`).join("")}</div></div>`).join(""));
+  fill("tk", D.tech.map((g) => `<div class="card rv"><h3>${esc(g.title)}</h3><div class="skc">${g.items.map((s) => `<span>${esc(s)}</span>`).join("")}</div></div>`).join(""));
   h = h.replace(/<div class="pt" data-t="(\d)"><\/div>/g, (m, i) => `<div class="pt" data-t="${i}">${D.projectTags[+i].map((x) => `<span>${esc(x)}</span>`).join("")}</div>`);
   h = h.replace('<span id="rot"></span>', `<span id="rot">${esc(D.rotating[0])}</span>`);
 

@@ -21,11 +21,11 @@ window.LANG.en = {
     "name": "Mohamed Shyiboub Ahmed",
     "hug": "UI/UX Designer",
     "role": "UI/UX Designer",
-    "lead": "I turn user needs into clear flows, wireframes and prototypes, with a Front-End and Flutter background that keeps designs practical to build.",
-    "c1": "View projects",
-    "c2": "Get in touch",
+    "lead": "I turn user research into clear flows, wireframes and Figma prototypes that are practical to build.",
+    "c1": "View my case studies",
+    "c2": "Let’s work together",
     "aT": "About me",
-    "aP": "UI/UX Designer with a technical background in Front-End and Flutter development. Experienced in user research, interviews, competitor analysis, and translating user needs into clear user flows, wireframes, prototypes, and intuitive interfaces. I combine design thinking with technical knowledge to create practical, user-centered digital experiences.",
+    "aP": "UI/UX designer focused on user research, interviews and competitor analysis, turning findings into clear user flows, wireframes and Figma prototypes. A Front-End and Flutter background helps me design interfaces that are practical to build.",
     "fL": "Location",
     "fLv": "Minya Al Qamh, Sharqia Governorate, Egypt",
     "fR": "Focus",
@@ -35,7 +35,7 @@ window.LANG.en = {
     "fG": "Languages",
     "fGv": "Arabic, English",
     "eT": "Experience & training",
-    "eS": "Design practice, front-end and mobile development.",
+    "eS": "UI/UX practice and training, backed by front-end and mobile development.",
     "cT": "Courses & short programs",
     "pT": "Projects",
     "pS": "Mobile app UI/UX case studies. See the full work on Behance.",
@@ -45,7 +45,11 @@ window.LANG.en = {
     "p2D": "An e-learning mobile app that makes educational content easier to discover and access. Intuitive, user-centered interfaces support a clear and engaging learning experience.",
     "pB": "View on Behance",
     "sT": "Skills",
+    "sS": "Core design tools first, then supporting skills.",
+    "tT": "Technical Background",
+    "tS": "Supporting skills that keep my designs practical to build and make developer hand-off smoother.",
     "dT": "Education & achievements",
+    "gK": "Winner",
     "gT": "1st place, GDG On-Campus Zagazig 2026",
     "gD": "Ranked first among the top 5 finalists in the UI/UX Design Competition.",
     "dDeg": "B.Sc. in Chemistry",
@@ -55,8 +59,9 @@ window.LANG.en = {
     "l1": "Arabic: Native",
     "l2": "English: Very good",
     "kT": "Let’s work together",
-    "kS": "Open to UI/UX design opportunities. Reach out by email, WhatsApp or Behance.",
+    "kS": "Open to UI/UX design opportunities. Connect on LinkedIn, or reach out by email, WhatsApp or Behance.",
     "kE": "Email",
+    "kLi": "Connect on LinkedIn",
     "kP": "WhatsApp",
     "kL": "Location",
     "dCV": "Download CV",
@@ -65,8 +70,8 @@ window.LANG.en = {
     "ord": "st",
     "pV": "View case study",
     "s1": "hours, UI/UX Design Diploma",
-    "s2": "hours, Flutter training at NTI",
-    "s3": "mobile app case studies",
+    "s2": "mobile app case studies",
+    "s3": "first place, GDG UI/UX competition",
     "fH": "Send a message",
     "fN": "Name",
     "fE": "Email",
@@ -95,6 +100,7 @@ window.LANG.en = {
       "date": "Oct 2026 – Present",
       "title": "UI/UX Design Trainee",
       "org": "Creativa Innovation Hubs, Mansoura",
+      "logo": "creativa",
       "body": "Practice user-centered design through research, user interviews, and competitor analysis. Translate findings into user flows, wireframes, and Figma interface concepts."
     },
     {
@@ -102,12 +108,14 @@ window.LANG.en = {
       "date": "Sep 2026 – Present",
       "title": "Front-End Development Diploma",
       "org": "Creativa Innovation Hubs, Zagazig",
+      "logo": "creativa",
       "body": "Building front-end foundations with HTML, CSS, and JavaScript, focused on responsive layouts and collaboration on modern web interfaces."
     },
     {
       "date": "Sep 2026",
       "title": "UI/UX Design Bootcamp Trainee",
       "org": "Huma Volve",
+      "logo": "humavolve",
       "body": "Focused bootcamp to strengthen practical design knowledge, applying user-centered thinking to interface and experience design tasks."
     },
     {
@@ -115,6 +123,7 @@ window.LANG.en = {
       "date": "Nov 2025 – Feb 2026",
       "title": "UI/UX Design Diploma",
       "org": "Creativa Innovation Hubs",
+      "logo": "creativa",
       "body": "Covered user research, interviews, competitor analysis, personas, user stories, and information architecture. Practiced user flows, card sorting, wireframing, and Figma components."
     },
     {
@@ -122,6 +131,7 @@ window.LANG.en = {
       "date": "Apr 2026 – May 2026",
       "title": "Flutter Mobile Development Trainee",
       "org": "NTI",
+      "logo": "nti",
       "body": "Covered Dart, OOP, Flutter UI, state management, and MVVM. Worked with REST APIs, JSON, authentication, Git, and GitHub while building mobile app projects."
     }
   ],
@@ -134,6 +144,7 @@ window.LANG.en = {
       "date": "February 2026",
       "title": "Freelancing Program",
       "org": "Creativa Innovation Hubs, Zagazig",
+      "logo": "creativa",
       "body": "Freelancing fundamentals, portfolio building, client and project management basics, LinkedIn profile optimization, and finding clients on freelance platforms."
     },
     {
@@ -141,6 +152,7 @@ window.LANG.en = {
       "date": "January 2026",
       "title": "Career Development Program",
       "org": "Creativa Innovation Hubs, Zagazig",
+      "logo": "creativa",
       "body": "Career-readiness and professional development skills, including presenting skills and preparing for professional opportunities."
     }
   ],
@@ -150,35 +162,17 @@ window.LANG.en = {
   skills: [
     {
       "title": "UI/UX Design",
+      "core": 4,
       "items": [
         "Figma",
-        "User Research",
-        "User Interviews",
+        "UX Research",
         "Wireframing",
         "Prototyping",
+        "User Interviews",
         "User Flows",
         "Personas",
         "Information Architecture",
         "Competitor Analysis"
-      ]
-    },
-    {
-      "title": "Front-End",
-      "items": [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "Responsive Web Design"
-      ]
-    },
-    {
-      "title": "Mobile Development",
-      "items": [
-        "Dart",
-        "Flutter",
-        "REST APIs",
-        "API Integration",
-        "Git & GitHub"
       ]
     },
     {
@@ -194,6 +188,30 @@ window.LANG.en = {
   ],
   /* ---------- END: skills groups ---------- */
 
+  /* ---------- START: technical background (separate section) ---------- */
+  tech: [
+    {
+      "title": "Front-End",
+      "items": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Responsive Web Design"
+      ]
+    },
+    {
+      "title": "Mobile Development",
+      "items": [
+        "Flutter",
+        "Dart",
+        "REST APIs",
+        "API Integration",
+        "Git & GitHub"
+      ]
+    }
+  ],
+  /* ---------- END: technical background ---------- */
+
   /* ---------- START: rotating lines under the hero role ---------- */
   /* ---------- START: project tags (pills above each project title) ---------- */
   projectTags: [
@@ -206,7 +224,7 @@ window.LANG.en = {
     "User research",
     "Wireframes & prototypes",
     "Figma interface concepts",
-    "Front-End & Flutter background"
+    "Practical, build-ready design"
   ]
   /* ---------- END: rotating lines ---------- */
 };

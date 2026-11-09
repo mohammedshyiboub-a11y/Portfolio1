@@ -12,6 +12,7 @@
 var calm = false;
 var L = document.documentElement.lang == "ar" ? "ar" : "en";
 if (!window.LANG[L]) L = "en";
+var BASE = L == "ar" ? "../" : ""; /* the Arabic page lives in /ar/, so assets are one level up */
 /* ---------- END: 1. Global state & helpers ---------- */
 
 
@@ -71,8 +72,12 @@ function item(x) {
   var tag = x.hours
     ? '<span class="tag"><span class="cn" data-c="' + x.hours + '">' + x.hours + "</span>" + hoursLabel + "</span>"
     : "";
-  return '<div class="card rv' + (x.current ? " now" : "") + '"><h3>' + x.title + '</h3>' +
-         '<div class="meta"><span>' + x.org + "</span><span>" + x.date + "</span>" + tag + "</div>" +
+  var lg = x.logo
+    ? '<img class="lg" src="' + BASE + 'assets/logos/' + x.logo + '.svg" alt="" width="44" height="44" loading="lazy">'
+    : "";
+  return '<div class="card rv' + (x.current ? " now" : "") + (x.logo ? " hl" : "") + '"><div class="ch">' + lg +
+         '<div class="ct"><h3>' + x.title + '</h3>' +
+         '<div class="meta"><span>' + x.org + "</span><span>" + x.date + "</span>" + tag + "</div></div></div>" +
          "<p>" + x.body + "</p></div>";
 }
 /* ---------- END: 3. Timeline / course card template ---------- */
@@ -91,21 +96,29 @@ function render() {
   document.querySelectorAll("[data-i]").forEach(function (n) { n.textContent = d[n.dataset.i]; });
   document.querySelectorAll("[data-p]").forEach(function (n) { n.placeholder = d[n.dataset.p]; });
 
-  /* marquee rows: row 1 = design skills, row 2 = front-end + mobile + professional */
+  /* marquee rows: row 1 = design skills, row 2 = professional skills
+     (technical skills have their own "Technical Background" section) */
   var sk = D.skills;
-  var row2 = sk[1].items.concat(sk[2].items, sk[3].items);
-  function mk(a) {
+  function mk(a, n) {
     var h = a.map(function (x) { return "<span>" + x + "</span>"; }).join("");
-    return h + h + h + h; /* repeated so the loop never shows a gap */
+    var out = "";
+    for (var i = 0; i < n; i++) out += h; /* repeated so the loop never shows a gap */
+    return out;
   }
-  document.getElementById("m1").innerHTML = mk(sk[0].items);
-  document.getElementById("m2").innerHTML = mk(row2);
+  document.getElementById("m1").innerHTML = mk(sk[0].items, 4);
+  document.getElementById("m2").innerHTML = mk(sk[1].items, 6);
 
   /* experience timeline, courses and skills section */
   document.getElementById("tl").innerHTML = D.experience.map(item).join("");
   document.getElementById("courses").innerHTML = D.courses.map(item).join("");
   document.getElementById("sk").innerHTML = sk.map(function (g) {
     return '<div class="skr rv"><h3>' + g.title + '</h3><div class="skc">' +
+           g.items.map(function (s, i) { return "<span" + (i < (g.core || 0) ? ' class="pr"' : "") + ">" + s + "</span>"; }).join("") + "</div></div>";
+  }).join("");
+
+  /* technical background: its own section */
+  document.getElementById("tk").innerHTML = D.tech.map(function (g) {
+    return '<div class="card rv"><h3>' + g.title + '</h3><div class="skc">' +
            g.items.map(function (s) { return "<span>" + s + "</span>"; }).join("") + "</div></div>";
   }).join("");
 
@@ -178,6 +191,7 @@ var secs = [].slice.call(document.querySelectorAll("main section"));
 addEventListener("scroll", function () {
   var y = scrollY + 120, c = "home";
   secs.forEach(function (s) { if (s.offsetTop <= y) c = s.id; });
+  if (c == "technical") c = "skills"; /* Technical Background has no menu link: keep Skills lit */
   document.querySelectorAll(".links a").forEach(function (a) {
     a.classList.toggle("on", a.getAttribute("href") == "#" + c);
   });
@@ -227,7 +241,7 @@ addEventListener("pointermove", function (e) {
   if (!calm && e.pointerType == "mouse" && c.parentNode.classList.contains("proj")) {
     var x = (e.clientX - r.left) / r.width - .5,
         y = (e.clientY - r.top) / r.height - .5;
-    c.style.transform = "perspective(900px) rotateY(" + x * 6 + "deg) rotateX(" + -y * 6 + "deg) translateY(-4px)";
+    c.style.transform = "perspective(900px) rotateY(" + x * 3 + "deg) rotateX(" + -y * 3 + "deg) translateY(-4px)";
   }
 });
 document.querySelectorAll(".proj .card").forEach(function (c) {
