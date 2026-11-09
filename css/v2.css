@@ -35,7 +35,7 @@ section.alt{background:color-mix(in srgb,var(--bg2) 72%,transparent);-webkit-bac
 
 /* ---------- Contact: icon-only badges (no links) ---------- */
 .icons{display:flex;flex-wrap:wrap;justify-content:center;gap:26px;margin:20px 0 28px}
-.ib{position:relative;width:84px;height:84px;border-radius:26px;display:grid;place-items:center;color:var(--a);cursor:default;background:var(--glass);border:1px solid var(--bd);transition:transform .35s cubic-bezier(.2,.8,.2,1),background .35s,color .35s,box-shadow .35s,border-color .35s;outline-offset:6px}
+.ib{position:relative;width:84px;height:84px;border-radius:26px;display:grid;place-items:center;color:var(--a);cursor:pointer;background:var(--glass);border:1px solid var(--bd);transition:transform .35s cubic-bezier(.2,.8,.2,1),background .35s,color .35s,box-shadow .35s,border-color .35s;outline-offset:6px}
 .ib svg{width:32px;height:32px;position:relative;z-index:1}
 .ib::before{content:"";position:absolute;inset:0;border-radius:inherit;border:1.5px solid var(--a);opacity:0}
 .ib:hover,.ib:focus-visible{transform:translateY(-10px) rotate(-6deg) scale(1.12);background:linear-gradient(135deg,var(--a),var(--a2));color:#fff;border-color:transparent;box-shadow:0 22px 40px -14px rgba(79,140,255,.6)}
@@ -51,7 +51,7 @@ section.alt{background:color-mix(in srgb,var(--bg2) 72%,transparent);-webkit-bac
 .skc span,.chips span,.tag{transition:transform .25s,border-color .25s,color .25s,background .25s}
 .skc span:hover{transform:translateY(-4px) scale(1.06);border-color:var(--a);color:var(--a)}
 
-@media(prefers-reduced-motion:no-preference){
+@media all{
   .aurora i:nth-child(1){animation:aur1 24s ease-in-out infinite alternate}
   .aurora i:nth-child(2){animation:aur2 28s ease-in-out infinite alternate}
   .aurora i:nth-child(3){animation:aur1 32s ease-in-out infinite alternate-reverse}

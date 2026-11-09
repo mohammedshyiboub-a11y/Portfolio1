@@ -252,7 +252,7 @@ footer{padding:28px 0;border-top:1px solid var(--bd);color:var(--tx2);font-size:
 .fl{position:absolute;z-index:3;padding:6px 14px;background:var(--glass);border:1px solid var(--bd);border-radius:10px;font-size:13px;font-weight:500;backdrop-filter:blur(8px);box-shadow:var(--fl-sh);animation:flt 3.6s ease-in-out infinite alternate}
 @keyframes flt{from{transform:translateY(6px)}to{transform:translateY(-12px)}}
 @media(max-width:560px){.photo::before{inset:-10px}.fl{font-size:12px;padding:5px 11px}}
-@media(prefers-reduced-motion:reduce){.aura i,.fl,.photo::before{animation:none!important}}
+
 /* ---------- END: 18. Profile photo: tilted frame, floating chips & aura ---------- */
 
 /* ---------- START: 19. Number counting helpers & reduced motion ----------
@@ -262,7 +262,7 @@ footer{padding:28px 0;border-top:1px solid var(--bd);color:var(--tx2);font-size:
 .tag .cn{font-variant-numeric:tabular-nums}
 .ach strong{color:var(--a2);display:flex;align-items:flex-start;gap:2px}
 .ach strong sup{font-size:.42em;font-weight:600;margin-top:.1em}
-@media(prefers-reduced-motion:reduce){.curtain,.cur,#fx{display:none}*{transition:none!important;animation:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+
 /* ---------- END: 19. Number counting helpers & reduced motion ---------- */
 
 /* ---------- START: 20. Skills section layout (final) ----------

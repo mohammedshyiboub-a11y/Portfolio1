@@ -9,7 +9,7 @@
    "calm" = visitor asked the OS for reduced motion (animations get skipped).
    "L" = current language code ("en" or "ar"). Each language has its own page (/ and /ar/),
    so the language is read from <html lang> that the build step wrote. */
-var calm = matchMedia("(prefers-reduced-motion:reduce)").matches;
+var calm = false;
 var L = document.documentElement.lang == "ar" ? "ar" : "en";
 if (!window.LANG[L]) L = "en";
 /* ---------- END: 1. Global state & helpers ---------- */

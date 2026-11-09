@@ -2,7 +2,7 @@
    v2.js - Extra motion layer (runs after main.js). Safe to remove.
    ===================================================================== */
 (function () {
-  var calm = matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var calm = false;
 
   /* Hero name: split by WORDS (never letters, so Arabic letters keep joining) */
   var h = document.querySelector(".hero h1");
