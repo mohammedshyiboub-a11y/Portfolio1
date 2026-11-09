@@ -144,7 +144,10 @@ function page(L) {
   h = h.replace(/\{\{ui:(\w+)\}\}/g, (m, k) => esc(d[k]))
        .replace(/\{\{LANG\}\}/g, L).replace(/\{\{DIR\}\}/g, rtl ? "rtl" : "ltr")
        .replace(/\{\{BASE\}\}/g, base)
-       .replace(/\{\{ALT_HREF\}\}/g, rtl ? "../" : "ar/")
+       .replace(/\{\{SEG\}\}/g, rtl
+         ? '<div class="seg" dir="ltr"><a id="lang" href="../index.html" hreflang="en" lang="en">EN</a><span class="on" lang="ar" aria-current="true">عربي</span></div>'
+         : '<div class="seg" dir="ltr"><span class="on" lang="en" aria-current="true">EN</span><a id="lang" href="ar/index.html" hreflang="ar" lang="ar">عربي</a></div>')
+       .replace(/\{\{ALT_HREF\}\}/g, rtl ? "../index.html" : "ar/index.html")
        .replace(/\{\{ALT_LANG\}\}/g, other)
        .replace(/\{\{ALT_LABEL\}\}/g, rtl ? "English" : "عربي");
 

@@ -37,12 +37,11 @@
     b.appendChild(p); setTimeout(function () { p.remove(); }, 750);
   });
 
-  /* Scroll parallax: photo drifts, hero text fades up */
+  /* Scroll parallax: photo drifts (hero text stays fully visible) */
   var ph = document.querySelector(".photo"), hg = document.querySelector(".hgrid");
   addEventListener("scroll", function () {
     var y = scrollY; if (y > 900) return;
     if (ph) ph.style.translate = "0 " + (y * .12) + "px";
-    if (hg) hg.style.opacity = 1 - y / 1100;
   }, { passive: true });
 
   /* Photo 3D tilt following the mouse */
