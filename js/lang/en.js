@@ -10,7 +10,7 @@ window.LANG.en = {
 
   /* ---------- START: interface texts (menus, headings, buttons, form...) ---------- */
   ui: {
-    "brand": "Mohamed Shyiboub",
+    "brand": "Mohammed Shyiboub",
     "n1": "Home",
     "n2": "About",
     "n3": "Experience",
@@ -18,7 +18,7 @@ window.LANG.en = {
     "n5": "Skills",
     "n6": "Education",
     "n7": "Contact",
-    "name": "Mohamed Shyiboub Ahmed",
+    "name": "Mohammed Shyiboub Hedhed",
     "hug": "UI/UX Designer",
     "role": "UI/UX Designer",
     "lead": "I turn user research into clear flows, wireframes and Figma prototypes that are practical to build.",
@@ -110,10 +110,10 @@ window.LANG.en = {
     "subj": "Portfolio message from ",
     "av": "Available for UI/UX opportunities",
     "pAll": "View all work on Behance",
-    "foot": "© 2026 Mohamed Shyiboub Ahmed (Mohammed Shyiboub · محمد شيبوب)",
+    "foot": "© 2026 Mohammed Shyiboub Hedhed (محمد شيبوب هدهد)",
     "thL": "Switch to light mode",
     "thD": "Switch to dark mode",
-    "altPhoto": "Mohamed Shyiboub Ahmed, UI/UX designer",
+    "altPhoto": "Mohammed Shyiboub Hedhed, UI/UX designer",
     "altP1": "Mazaq food delivery app UI/UX screens",
     "altP2": "Skillo e-learning app UI/UX screens"
   },
