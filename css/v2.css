@@ -149,7 +149,7 @@ section.alt{background:var(--bg2)}
 .ch .ct{min-width:0}
 .ch .meta{margin:4px 0 0}
 .lg{flex:none;width:44px;height:44px;border-radius:11px;display:block;object-fit:cover;border:1px solid var(--bd);background:var(--card)}
-.tl .card.hl::before{top:36px}
+.tl .card.hl::before{top:44px}
 
 /* ---------- 3) Large project cards: one per row, full-width screenshot on top ---------- */
 .proj{grid-template-columns:1fr;gap:40px}
@@ -187,3 +187,46 @@ section.alt{background:var(--bg2)}
 .ib.li:hover,.ib.li:focus-visible{background:#0B7BE0;border-color:#0B7BE0}
 .cvw{gap:14px;flex-wrap:wrap}
 .btn.out.big{padding:16px 26px;font-size:16px}
+
+/* Organisation logos: all the same size, photos/logos cropped to a square */
+.lg{width:60px;height:60px;object-fit:cover;background:#fff}
+.ach .gl{width:60px;height:60px}
+
+/* Stats strip: four counters */
+.stats{grid-template-columns:repeat(4,1fr)}
+@media(max-width:860px){.stats{grid-template-columns:repeat(2,1fr);gap:24px 14px}}
+
+/* Header buttons (theme / language / menu): same height */
+.tools .btn{height:40px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.tools .btn.ico{width:40px;padding:0}
+#menu{width:40px;padding:0}
+
+/* =====================================================================
+   Extra contrast pass (hero first): solid text, brighter secondary colours, calmer particles
+   ===================================================================== */
+:root[data-theme=dark]{--tx2:#E1E7F3}
+:root[data-theme=light]{--tx2:#1A2236}
+.hero h1{background:none;-webkit-text-fill-color:currentColor;color:var(--tx);animation:up .9s .35s cubic-bezier(.2,.7,.2,1) both}
+.hero h1 .w>i{background:none;-webkit-text-fill-color:currentColor;color:var(--tx);animation:wup 1s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--d)*110ms + 1s)}
+.hero h1,.hero .role,.hero .lead{text-shadow:0 2px 22px var(--bg)}
+.role{font-weight:600}
+:root[data-theme=dark] .role{color:var(--a-soft)}
+.rot,.lead{color:var(--tx)}
+.rot{font-weight:500}
+.lead{font-weight:500}
+:root[data-theme=dark] .btn.out{color:var(--a-soft);border-color:var(--a-soft)}
+.cta .btn:not(.pri){background:var(--card);color:var(--tx)}
+.cta .btn.out{color:var(--a)}
+:root[data-theme=dark] .cta .btn.out{color:var(--a-soft)}
+.btn.pri{font-weight:700}
+#fx{opacity:.3}
+.hero .orb{opacity:.18}
+
+/* Contrast pass 2: tags, project pills, section numbers, gold badge */
+:root[data-theme=dark] .tag,:root[data-theme=dark] .pt span{color:#D6E4FF}
+:root[data-theme=dark] .pt span{background:rgba(111,161,255,.2);border-color:rgba(111,161,255,.5)}
+:root[data-theme=dark] .tag{border-color:#5A6A86}
+:root[data-theme=light] .tag,:root[data-theme=light] .pt span{color:#0F2A8A}
+:root[data-theme=light] .pt span{background:rgba(23,64,196,.1);border-color:rgba(23,64,196,.4)}
+:root[data-theme=light] .num{color:#0F2A8A}
+:root[data-theme=light]{--gold1:#A65A05;--gold2:#7F3B05}

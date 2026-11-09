@@ -42,7 +42,7 @@ const url = { en: site + "/", ar: site + "/ar/" };
 function item(x, L, base) {
   const hoursLabel = L === "ar" ? " ساعة" : " hours";
   const tag = x.hours ? `<span class="tag"><span class="cn" data-c="${x.hours}">${x.hours}</span>${hoursLabel}</span>` : "";
-  const lg = x.logo ? `<img class="lg" src="${base}assets/logos/${x.logo}.svg" alt="" width="44" height="44" loading="lazy">` : "";
+  const lg = x.logo ? `<img class="lg" src="${base}assets/logos/${x.logo}.png" alt="" width="60" height="60" loading="lazy">` : "";
   return `<div class="card rv${x.current ? " now" : ""}${x.logo ? " hl" : ""}"><div class="ch">${lg}<div class="ct"><h3>${esc(x.title)}</h3><div class="meta"><span>${esc(x.org)}</span><span>${esc(x.date)}</span>${tag}</div></div></div><p>${esc(x.body)}</p></div>`;
 }
 function seoHead(L) {

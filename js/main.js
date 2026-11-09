@@ -73,7 +73,7 @@ function item(x) {
     ? '<span class="tag"><span class="cn" data-c="' + x.hours + '">' + x.hours + "</span>" + hoursLabel + "</span>"
     : "";
   var lg = x.logo
-    ? '<img class="lg" src="' + BASE + 'assets/logos/' + x.logo + '.svg" alt="" width="44" height="44" loading="lazy">'
+    ? '<img class="lg" src="' + BASE + 'assets/logos/' + x.logo + '.png" alt="" width="60" height="60" loading="lazy">'
     : "";
   return '<div class="card rv' + (x.current ? " now" : "") + (x.logo ? " hl" : "") + '"><div class="ch">' + lg +
          '<div class="ct"><h3>' + x.title + '</h3>' +

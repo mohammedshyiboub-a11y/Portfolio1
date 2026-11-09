@@ -70,6 +70,7 @@ window.LANG.en = {
     "ord": "st",
     "pV": "View case study",
     "s1": "hours, UI/UX Design Diploma",
+    "sF": "hours, Flutter training at NTI Zagazig",
     "s2": "mobile app case studies",
     "s3": "first place, GDG UI/UX competition",
     "fH": "Send a message",
@@ -122,7 +123,7 @@ window.LANG.en = {
       "hours": "63",
       "date": "Nov 2025 – Feb 2026",
       "title": "UI/UX Design Diploma",
-      "org": "Creativa Innovation Hubs",
+      "org": "Creativa Innovation Hubs, Zagazig",
       "logo": "creativa",
       "body": "Covered user research, interviews, competitor analysis, personas, user stories, and information architecture. Practiced user flows, card sorting, wireframing, and Figma components."
     },
@@ -130,7 +131,7 @@ window.LANG.en = {
       "hours": "120",
       "date": "Apr 2026 – May 2026",
       "title": "Flutter Mobile Development Trainee",
-      "org": "NTI",
+      "org": "NTI, Zagazig",
       "logo": "nti",
       "body": "Covered Dart, OOP, Flutter UI, state management, and MVVM. Worked with REST APIs, JSON, authentication, Git, and GitHub while building mobile app projects."
     }
