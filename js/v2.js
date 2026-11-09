@@ -13,6 +13,23 @@
       return '<span class="w" aria-hidden="true"><i style="--d:' + i + '">' + w + "</i></span>";
     }).join("");
   }
+
+  /* Fit the name on ONE line: shrink the font only when the free width is too small */
+  function fitName() {
+    if (!h) return;
+    var sel = h.parentNode, box = sel.parentNode, cs = getComputedStyle(sel);
+    h.style.fontSize = "";
+    var fs = parseFloat(getComputedStyle(h).fontSize);
+    var avail = box.clientWidth - parseFloat(cs.marginLeft) - parseFloat(cs.marginRight) -
+      parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - parseFloat(cs.borderLeftWidth) - parseFloat(cs.borderRightWidth) - 2;
+    var w = h.getBoundingClientRect().width;
+    if (w > avail && avail > 0) h.style.fontSize = Math.floor(fs * avail / w * 100) / 100 + "px";
+  }
+  fitName();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitName);
+  addEventListener("load", fitName);
+  var ft; addEventListener("resize", function () { clearTimeout(ft); ft = setTimeout(fitName, 120); });
+
   if (calm) return;
 
   /* Cursor ring that follows the mouse and grows over interactive things */

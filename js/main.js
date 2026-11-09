@@ -233,6 +233,7 @@ setInterval(tick, 2600);
 /* ---------- START: 12. Card spotlight & project tilt ----------
    Moves the spotlight gradient with the pointer on every card; project cards also tilt in 3D. */
 addEventListener("pointermove", function (e) {
+  if (e.pointerType != "mouse") return; /* touch: no spotlight, no tilt (they would fight with scrolling) */
   var c = e.target.closest && e.target.closest(".card");
   if (!c) return;
   var r = c.getBoundingClientRect();
@@ -371,6 +372,7 @@ bindNums();
   addEventListener("resize", size);
 
   cv.parentNode.addEventListener("pointermove", function (e) {
+    if (e.pointerType != "mouse") { mx = my = -999; return; } /* fingers never push the particles */
     var r = cv.getBoundingClientRect();
     mx = e.clientX - r.left; my = e.clientY - r.top;
   });
