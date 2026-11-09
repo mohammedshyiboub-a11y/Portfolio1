@@ -77,6 +77,7 @@ function seoHead(L) {
   return [
     `<title>${esc(c.title)}</title>`,
     `<meta name="description" content="${esc(c.description)}">`,
+    `<meta name="keywords" content="${esc(cfg.keywords[L])}">`,
     `<meta name="author" content="${esc(d.name)}">`,
     `<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">`,
     `<link rel="canonical" href="${url[L]}">`,

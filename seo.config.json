@@ -14,15 +14,19 @@
     "محمد شيبوب احمد"
   ],
   "en": {
-    "title": "Mohamed Shyiboub Ahmed – UI/UX Designer | Portfolio",
-    "description": "Portfolio of Mohamed Shyiboub Ahmed (Mohammed Shyiboub), UI/UX designer from Egypt. Mobile app case studies, Figma prototypes, Front-End and Flutter skills.",
+    "title": "Mohammed Shyiboub (Mohamed Shyiboub Ahmed) – UI/UX Designer | Portfolio",
+    "description": "Official portfolio of Mohammed Shyiboub (Mohamed Shyiboub Ahmed), UI/UX designer from Egypt. Mobile app case studies, Figma prototypes, Front-End and Flutter skills.",
     "ogLocale": "en_US",
     "siteName": "Mohamed Shyiboub Ahmed – Portfolio"
   },
   "ar": {
-    "title": "محمد شيبوب أحمد – مصمم UI/UX | معرض الأعمال",
-    "description": "معرض أعمال محمد شيبوب أحمد (Mohamed Shyiboub)، مصمم UI/UX من مصر. دراسات حالة لتطبيقات الموبايل، نماذج Figma الأولية، وخبرة في Front-End وFlutter.",
+    "title": "محمد شيبوب (Mohammed Shyiboub) – مصمم UI/UX | معرض الأعمال",
+    "description": "الموقع الرسمي لمحمد شيبوب أحمد (Mohammed Shyiboub)، مصمم UI/UX من مصر. دراسات حالة لتطبيقات الموبايل، نماذج Figma الأولية، وخبرة في Front-End وFlutter.",
     "ogLocale": "ar_EG",
     "siteName": "محمد شيبوب أحمد – معرض الأعمال"
+  },
+  "keywords": {
+    "en": "Mohammed Shyiboub, Mohamed Shyiboub, Mohamed Shyiboub Ahmed, Mohammed Shyiboub portfolio, UI/UX designer Egypt, Figma designer, Flutter, Front-End, Sharqia",
+    "ar": "محمد شيبوب, محمد شيبوب أحمد, محمد شيبوب مصمم, محمد شيبوب UI/UX, مصمم واجهات مستخدم مصر, معرض أعمال محمد شيبوب, الشرقية, منيا القمح"
   }
 }
