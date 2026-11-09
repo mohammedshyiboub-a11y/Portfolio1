@@ -378,3 +378,36 @@ header .wrap.nav{width:min(1180px,calc(100% - 32px));max-width:none;margin-inlin
  .sv4 .svimg{margin:-24px -20px 18px}
  .sv4 .svimg img{aspect-ratio:16/9;object-position:left center}
 }
+
+/* =====================================================================
+   NAME ANIMATION: words rise in one by one, then a colour sweep runs across the name.
+   The base colour is always the full-strength text colour, so contrast never drops.
+   ===================================================================== */
+:root[data-theme=dark]{--nm1:#9EC1FF;--nm2:#C4B5FF}
+:root[data-theme=light]{--nm1:#1740C4;--nm2:#4B36D6}
+.hero h1 .w>i{
+ background-image:linear-gradient(100deg,var(--tx) 0%,var(--tx) 38%,var(--nm1) 47%,var(--nm2) 54%,var(--tx) 63%,var(--tx) 100%);
+ background-size:260% 100%;background-position:100% 0;
+ -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:none}
+@media(prefers-reduced-motion:no-preference){
+ .hero h1 .w>i{
+  animation:wup 1s cubic-bezier(.2,.8,.2,1) forwards,nmsweep 5s ease-in-out infinite;
+  animation-delay:calc(var(--d)*110ms + 1s),calc(var(--d)*140ms + 2.2s)}
+ @keyframes nmsweep{0%{background-position:100% 0}55%,100%{background-position:0% 0}}
+ .sel b{animation:hnd 2.6s ease-in-out infinite}
+ .sel b:nth-child(2){animation-delay:.3s}.sel b:nth-child(3){animation-delay:.6s}.sel b:nth-child(4){animation-delay:.9s}
+ @keyframes hnd{0%,100%{transform:scale(1)}50%{transform:scale(1.5);background:var(--a)}}
+ .sel{animation:selin 1.2s .6s cubic-bezier(.2,.8,.2,1) both}
+ @keyframes selin{from{clip-path:inset(0 100% 100% 0)}to{clip-path:inset(-20px -20px -80px -20px)}}
+ .sel em{animation:fade .6s 1.6s both}
+}
+
+/* =====================================================================
+   ROUNDED: every button and icon is fully rounded
+   ===================================================================== */
+.btn,.btn.big,.btn.pri.big,.btn.out.big,.btn.ico,.btn.ico.big,.cvb,.fm .btn{border-radius:999px}
+.ib,.ib.li,.ib::before{border-radius:50%}
+.ic,.svi,.proc b{border-radius:50%}
+.vw,.tag,.sel em,.svb,.tip,.fl,.photo .fl{border-radius:999px}
+.skc span,.chips span,.mt span,.pt span,.svt span{border-radius:999px}
+.logo img,:root[data-theme=light] .logo img{border-radius:0}
