@@ -673,3 +673,20 @@ footer .wrap{text-align:center}
   .card.ach strong{justify-content:center}
   .ach .gl{margin-inline:auto}
 }
+
+/* ---------- Contact form heading ("Send a message") centred ---------- */
+.fm h3{text-align:center}
+.fm>div:has(>button[type=submit]){display:flex;justify-content:center}
+
+/* ---------- Contact form: even, roomier spacing ---------- */
+.fm{padding:32px;gap:20px}
+.fm h3{margin:0 0 8px}
+.fm .row{gap:20px}
+.fm label{gap:8px}
+.fm>div:has(>button[type=submit]){margin-top:6px}
+#fst{margin:0;text-align:center}
+#fst:empty{display:none}
+@media(max-width:860px){.fm{padding:24px 20px;gap:18px}.fm .row{gap:18px}}
+
+/* ---------- Contact form: bigger submit button ---------- */
+.fm button[type=submit]{height:54px;padding:0 44px;font-size:16px}
