@@ -747,3 +747,28 @@ footer .wrap{text-align:center}
   /* education / achievement / form (already centred, kept in sync) */
   .card.ach,.fm{text-align:center}
 }
+
+/* =====================================================================
+   Case-study card (04): icon sits on the image edge exactly like the other service cards
+   ===================================================================== */
+@media(max-width:860px){
+  .sv4 .svimg{margin-bottom:10px}
+  .sv4 .svi{margin-top:-40px}
+}
+
+/* =====================================================================
+   Narrow desktop windows (861 - 1180px): the brand name always fits fully.
+   Logo column takes the width it needs (not an equal third), nav links get tighter.
+   ===================================================================== */
+@media(min-width:861px){
+  header .nav{grid-template-columns:auto 1fr auto;gap:12px}
+  .logo span{white-space:nowrap}
+}
+@media(min-width:861px) and (max-width:1180px){
+  .nav-cta{display:none}
+  .links a{padding:8px 9px;font-size:13.5px}
+}
+@media(min-width:861px) and (max-width:960px){
+  .logo span{font-size:16px}
+  .links a{padding:8px 7px;font-size:13px}
+}
