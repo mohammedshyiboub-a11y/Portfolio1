@@ -715,3 +715,35 @@ footer .wrap{text-align:center}
 
 /* ---------- Project cards: "View on Behance" button centred ---------- */
 .proj .pb .btn{align-self:center}
+
+/* =====================================================================
+   MOBILE / TABLET (up to 860px): everything inside every card is centred
+   (timeline, courses, services, case study steps, projects, education, form)
+   ===================================================================== */
+@media(max-width:860px){
+  .card{text-align:center}
+  .card p{margin-inline:auto}
+  /* timeline + courses: logo above the title, meta + hours tag centred */
+  .card .ch{flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px}
+  .card .meta,.card .ch .meta{justify-content:center;text-align:center}
+  /* services */
+  .sv{align-items:center;text-align:center}
+  .sv .svi{margin-inline:auto}
+  .svt{justify-content:center}
+  .sv4h{flex-direction:column;align-items:center;text-align:center;gap:10px}
+  .sv4>p{margin-inline:auto}
+  .proc{justify-items:center}
+  .proc::before{display:none!important}
+  .proc li{display:flex!important;flex-direction:column;align-items:center;text-align:center;padding-bottom:22px}
+  .proc li:last-child{padding-bottom:0}
+  .proc b{grid-row:auto}
+  .proc h4{align-self:center}
+  .proc p{grid-column:auto;margin-inline:auto;max-width:34ch}
+  /* projects */
+  .proj .pb{align-items:center;text-align:center}
+  .proj .pb p{margin-inline:auto}
+  .pt,.chips{justify-content:center}
+  .proj .pb .btn{align-self:center}
+  /* education / achievement / form (already centred, kept in sync) */
+  .card.ach,.fm{text-align:center}
+}
