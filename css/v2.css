@@ -690,3 +690,6 @@ footer .wrap{text-align:center}
 
 /* ---------- Contact form: bigger submit button ---------- */
 .fm button[type=submit]{height:54px;padding:0 44px;font-size:16px}
+
+/* ---------- Project cards: "View on Behance" button centred ---------- */
+.proj .pb .btn{align-self:center}
