@@ -296,8 +296,10 @@ header .wrap.nav{width:min(1180px,calc(100% - 32px));max-width:none;margin-inlin
  header .nav{padding:0 6px 0 14px;gap:8px}[dir=rtl] header .nav{padding:0 14px 0 6px}
  .tools{gap:5px}
  .seg>*{min-width:34px;padding:0 7px;font-size:12.5px}
- .logo span{max-width:84px}
+ .logo span{max-width:none;flex:0 1 auto;font-size:14px;white-space:nowrap}
 }
+/* English name is long: show it only when it fully fits, otherwise logo only (never clipped under the toggle) */
+@media(max-width:455px){:root:not([dir=rtl]) .logo span{display:none}}
 @media(max-width:380px){
  .logo span{display:none}
  .seg>*{min-width:30px;padding:0 6px}
@@ -559,6 +561,9 @@ header .wrap.nav{width:min(1180px,calc(100% - 32px));max-width:none;margin-inlin
   .ib svg{width:26px;height:26px}
   .svc .btn{padding:13px 24px}
 }
+
+/* LinkedIn + CV buttons: 54px tall on mobile / tablet layouts (EN + AR) */
+@media(max-width:860px){.cvw .cvb{height:54px;min-height:54px;max-height:54px;padding-block:0;box-sizing:border-box}}
 
 /* ---------- 5c) small phones: nav brand text hidden (the logo stays), slightly tighter ---------- */
 @media(max-width:420px){
