@@ -298,10 +298,7 @@ header .wrap.nav{width:min(1180px,calc(100% - 32px));max-width:none;margin-inlin
  .seg>*{min-width:34px;padding:0 7px;font-size:12.5px}
  .logo span{max-width:none;flex:0 1 auto;font-size:14px;white-space:nowrap}
 }
-/* English name is long: show it only when it fully fits, otherwise logo only (never clipped under the toggle) */
-@media(max-width:455px){:root:not([dir=rtl]) .logo span{display:none}}
 @media(max-width:380px){
- .logo span{display:none}
  .seg>*{min-width:30px;padding:0 6px}
 }
 
@@ -567,10 +564,29 @@ header .wrap.nav{width:min(1180px,calc(100% - 32px));max-width:none;margin-inlin
 
 /* ---------- 5c) small phones: nav brand text hidden (the logo stays), slightly tighter ---------- */
 @media(max-width:420px){
-  .logo span{display:none}
   .cta .btn.big,.cta .btn.pri.big,.cta .btn.out.big{font-size:14px;padding:0 4px}
 }
+/* Brand name: always visible on phones, responsive size, wraps to 2-3 lines instead of being cut or hidden */
 .logo span{white-space:nowrap}
+@media(max-width:480px){
+  .logo{flex:1 1 auto;min-width:0;max-width:100%}
+  .logo span{display:block;white-space:normal;max-width:none;min-width:0;flex:0 1 auto;font-size:clamp(11px,3.3vw,14px);line-height:1.15;text-wrap:balance;overflow-wrap:normal}
+}
+@media(max-width:340px){
+  .logo{gap:5px}
+  .logo img{height:22px}
+  .logo span{font-size:10px}
+  .tools{gap:3px}
+  .tools .btn.ico,.tools #menu{width:34px;height:34px}
+  .seg>*{min-width:26px;padding:0 5px}
+}
+@media(max-width:400px){
+  .tools{gap:4px}
+  .tools .btn.ico,.tools #menu{width:36px;height:36px}
+  .seg{height:36px;padding:3px}
+  .seg>*{height:28px;min-width:28px;padding:0 6px;font-size:12px}
+  header .nav{padding:0 5px 0 12px}[dir=rtl] header .nav{padding:0 12px 0 5px}
+}
 
 /* ---------- 5d) DESKTOP (1100px+): larger reading sizes ---------- */
 @media(min-width:1100px){
