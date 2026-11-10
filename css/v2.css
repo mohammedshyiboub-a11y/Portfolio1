@@ -772,3 +772,10 @@ footer .wrap{text-align:center}
   .logo span{font-size:16px}
   .links a{padding:8px 7px;font-size:13px}
 }
+
+/* Case-study card (04), desktop: same layout as the other service cards (icon on the image edge, text underneath) */
+@media(min-width:861px){
+  .sv4 .svimg{margin-bottom:10px}
+  .sv4h{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:0}
+  .sv4 .svi{margin-top:-40px;margin-bottom:6px}
+}
