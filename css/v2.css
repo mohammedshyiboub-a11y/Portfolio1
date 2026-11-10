@@ -625,12 +625,12 @@ header .wrap.nav{width:min(1180px,calc(100% - 32px));max-width:none;margin-inlin
    V5 layer: centred headings & label/value pairs, 3:4 photo, calmer hero
    ===================================================================== */
 
-/* ---------- Photo: exactly 3 wide : 4 tall, no pulsing frames ---------- */
-@media(min-width:861px){.hgrid{grid-template-columns:minmax(0,1fr) 260px}.photo{max-width:260px}}
-.photo img{aspect-ratio:3/4;object-position:50% 12%}
+/* ---------- Photo: wider and shorter (15 wide : 16 tall), no pulsing frames ---------- */
+@media(min-width:861px){.hgrid{grid-template-columns:minmax(0,1fr) 300px}.photo{max-width:300px}}
+.photo img{height:auto;aspect-ratio:15/16;object-position:50% 14%}
 .rings{display:none}
 .photo::before{animation:none!important;opacity:1}
-@media(max-width:860px){.photo{width:min(52vw,210px);max-width:none}}
+@media(max-width:860px){.photo{width:min(64vw,250px);max-width:none}}
 
 /* ---------- Name frame: compact height; the duplicated role line is gone ---------- */
 .sel{padding:8px 18px}
