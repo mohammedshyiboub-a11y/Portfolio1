@@ -541,16 +541,17 @@ header .wrap.nav{width:min(1180px,calc(100% - 32px));max-width:none;margin-inlin
 
   /* three hero buttons side by side in ONE row */
   .cta{flex-wrap:nowrap;gap:8px;margin-top:26px}
-  .cta .btn.big,.cta .btn.pri.big,.cta .btn.out.big{flex:1 1 0;min-width:0;height:46px;padding:0 8px;gap:6px;justify-content:center;font-size:13px;box-shadow:none;white-space:nowrap}
+  .cta .btn.big,.cta .btn.pri.big,.cta .btn.out.big{flex:1 1 0;min-width:0;height:52px;padding:0 8px;gap:6px;justify-content:center;font-size:14.5px;font-weight:700;box-shadow:none;white-space:nowrap}
   .cta .btn.pri.big{flex-grow:1.15}
   .cta .btn svg.ar,.cta .btn .dl{display:none}
   .t-l{display:none}
   .t-s{display:inline}
 
   /* LinkedIn + CV buttons in one row too */
-  .cvw{flex-wrap:nowrap;gap:10px}
-  .cvw .cvb{flex:1 1 0;min-width:0;justify-content:center;padding:12px 10px;font-size:13px;text-align:center;line-height:1.3;gap:8px}
-  .cvw .cvb svg{width:16px;height:16px;flex:none}
+  /* same row (EN + AR), comfortable fixed height */
+  .cvw{flex-direction:row;flex-wrap:nowrap;gap:10px;align-items:stretch}
+  .cvw .cvb{flex:1 1 0;min-width:0;height:54px;justify-content:center;padding:0 10px;font-size:14px;font-weight:700;text-align:center;line-height:1.25;gap:8px}
+  .cvw .cvb svg{width:18px;height:18px;flex:none}
 
   /* contact icons: four in a row */
   .icons{gap:14px}
@@ -562,7 +563,7 @@ header .wrap.nav{width:min(1180px,calc(100% - 32px));max-width:none;margin-inlin
 /* ---------- 5c) small phones: nav brand text hidden (the logo stays), slightly tighter ---------- */
 @media(max-width:420px){
   .logo span{display:none}
-  .cta .btn.big,.cta .btn.pri.big,.cta .btn.out.big{font-size:12.5px;padding:0 6px}
+  .cta .btn.big,.cta .btn.pri.big,.cta .btn.out.big{font-size:14px;padding:0 4px}
 }
 .logo span{white-space:nowrap}
 
