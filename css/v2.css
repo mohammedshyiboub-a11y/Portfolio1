@@ -619,3 +619,57 @@ header .wrap.nav{width:min(1180px,calc(100% - 32px));max-width:none;margin-inlin
   .ib:active{transform:scale(.93)}
   .sv:active{transform:scale(.99)}
 }
+
+
+/* =====================================================================
+   V5 layer: centred headings & label/value pairs, 3:4 photo, calmer hero
+   ===================================================================== */
+
+/* ---------- Photo: exactly 3 wide : 4 tall, no pulsing frames ---------- */
+@media(min-width:861px){.hgrid{grid-template-columns:minmax(0,1fr) 260px}.photo{max-width:260px}}
+.photo img{aspect-ratio:3/4;object-position:50% 12%}
+.rings{display:none}
+.photo::before{animation:none!important;opacity:1}
+@media(max-width:860px){.photo{width:min(52vw,210px);max-width:none}}
+
+/* ---------- Name frame: compact height; the duplicated role line is gone ---------- */
+.sel{padding:8px 18px}
+.hero h1{line-height:1.15}
+[dir=rtl] .hero h1{line-height:1.32}
+.rot{margin-top:46px}
+@media(max-width:860px){.sel{padding:6px 14px}}
+@media(max-width:640px){.rot{margin-top:44px}}
+
+/* ---------- Section headings: centred (both languages) incl. the number line above and the bar below ---------- */
+.sh{max-width:680px;margin-inline:auto;text-align:center}
+.sh .num{margin-inline:auto}
+.num::before{content:"";display:block;height:1px;width:0;background:linear-gradient(270deg,var(--a),var(--a2));transition:width 1.1s .25s cubic-bezier(.2,.7,.2,1)}
+.sh.in .num::before{width:56px}
+.sh h2::after{margin-inline:auto}
+.sh p{margin-inline:auto}
+
+/* ---------- About facts: label and answer both centred ---------- */
+.facts div{flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center}
+.facts span{font-size:13.5px}
+.facts b{font-size:16px;font-weight:600}
+
+/* ---------- Stats: number and caption centred, accent line on top ---------- */
+.stats div{padding:16px 8px 0;text-align:center}
+.stats div::before,.stats div::after{inset-block:auto;inset-inline:0;top:0;bottom:auto;width:auto;height:2px}
+.stats div::after{transform:scaleX(0);transform-origin:center}
+.stats div.go::after{transform:scaleX(1)}
+@media(max-width:560px){.stats div{padding-inline:6px}}
+
+/* ---------- Other short label / title blocks: centred too ---------- */
+.skr h3{text-align:center}
+.skc{justify-content:center}
+.sk{margin-inline:auto}
+.tk .card h3{text-align:center}
+#education .cols .card{text-align:center}
+#education .cols .card .meta{justify-content:center}
+footer .wrap{text-align:center}
+@media(max-width:860px){
+  .card.ach{align-items:center;text-align:center}
+  .card.ach strong{justify-content:center}
+  .ach .gl{margin-inline:auto}
+}
