@@ -12,7 +12,13 @@
     h.innerHTML = t
       .split(/\s+/)
       .map(function (w, i) {
-        return '<span class="w" aria-hidden="true"><i style="--d:' + i + '">' + w + "</i></span>";
+        return (
+          '<span class="w" aria-hidden="true"><i style="--d:' +
+          i +
+          '">' +
+          w +
+          "</i></span>"
+        );
       })
       .join("");
   }
@@ -39,7 +45,8 @@
       h.style.fontSize = Math.floor(((fs * avail) / w) * 100) / 100 + "px";
   }
   fitName();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitName);
+  if (document.fonts && document.fonts.ready)
+    document.fonts.ready.then(fitName);
   addEventListener("load", fitName);
   var ft;
   addEventListener("resize", function () {
@@ -65,7 +72,10 @@
       r.classList.add("on");
       r.classList.toggle(
         "big",
-        !!(e.target.closest && e.target.closest("a,button,.ib,.card,.fl,input,textarea")),
+        !!(
+          e.target.closest &&
+          e.target.closest("a,button,.ib,.card,.fl,input,textarea")
+        ),
       );
     });
     (function loop() {
@@ -110,7 +120,11 @@
         a = (e.clientX - q.left) / q.width - 0.5,
         b = (e.clientY - q.top) / q.height - 0.5;
       ph.style.transform =
-        "perspective(800px) rotateY(" + a * 14 + "deg) rotateX(" + -b * 14 + "deg)";
+        "perspective(800px) rotateY(" +
+        a * 14 +
+        "deg) rotateX(" +
+        -b * 14 +
+        "deg)";
     });
     ph.addEventListener("pointerleave", function () {
       ph.style.transform = "";
@@ -122,7 +136,10 @@
     el.addEventListener("pointermove", function (e) {
       if (e.pointerType != "mouse") return;
       var q = el.getBoundingClientRect();
-      el.style.setProperty("--tx", (e.clientX - q.left - q.width / 2) * 0.18 + "px");
+      el.style.setProperty(
+        "--tx",
+        (e.clientX - q.left - q.width / 2) * 0.18 + "px",
+      );
       el.style.translate = (e.clientX - q.left - q.width / 2) * 0.18 + "px 0";
     });
     el.addEventListener("pointerleave", function () {

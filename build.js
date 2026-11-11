@@ -19,14 +19,19 @@ const path = require("path");
 const vm = require("vm");
 
 const ROOT = __dirname;
-const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, "seo.config.json"), "utf8"));
+const cfg = JSON.parse(
+  fs.readFileSync(path.join(ROOT, "seo.config.json"), "utf8"),
+);
 const template = fs.readFileSync(path.join(ROOT, "template.html"), "utf8");
 
 /* ----- load the language files (they assign window.LANG.xx) ----- */
 const sandbox = { window: {} };
 vm.createContext(sandbox);
 ["en", "ar"].forEach((l) =>
-  vm.runInContext(fs.readFileSync(path.join(ROOT, "js/lang", l + ".js"), "utf8"), sandbox),
+  vm.runInContext(
+    fs.readFileSync(path.join(ROOT, "js/lang", l + ".js"), "utf8"),
+    sandbox,
+  ),
 );
 const LANG = sandbox.window.LANG;
 
@@ -122,10 +127,10 @@ function seoHead(L) {
       url: "https://www.behance.net/gallery/249426463/Skillo-App-Mobile-UIUX-Design-Case-Study",
     },
   ];
-  const ld = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(
-    /</g,
-    "\\u003c",
-  );
+  const ld = JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": graph,
+  }).replace(/</g, "\\u003c");
   return [
     `<title>${esc(c.title)}</title>`,
     `<meta name="description" content="${esc(c.description)}">`,
@@ -167,12 +172,19 @@ function page(L) {
   let h = template.replace("{{SEO}}", seoHead(L));
 
   /* texts: <tag data-i="key"></tag>  ->  <tag data-i="key">text</tag> */
-  h = h.replace(/<(\w+)((?:[^>]*?)\sdata-i="([^"]+)"[^>]*)>\s*<\/\1\s*>/g, (m, tag, attrs, key) => {
-    if (d[key] === undefined) throw new Error("Missing ui key: " + key + " (" + L + ")");
-    return `<${tag}${attrs}>${esc(d[key])}</${tag}>`;
-  });
+  h = h.replace(
+    /<(\w+)((?:[^>]*?)\sdata-i="([^"]+)"[^>]*)>\s*<\/\1\s*>/g,
+    (m, tag, attrs, key) => {
+      if (d[key] === undefined)
+        throw new Error("Missing ui key: " + key + " (" + L + ")");
+      return `<${tag}${attrs}>${esc(d[key])}</${tag}>`;
+    },
+  );
   /* placeholders */
-  h = h.replace(/\sdata-p="([^"]+)"/g, (m, key) => `${m} placeholder="${esc(d[key])}"`);
+  h = h.replace(
+    /\sdata-p="([^"]+)"/g,
+    (m, key) => `${m} placeholder="${esc(d[key])}"`,
+  );
   /* counters show their final number even without JavaScript */
   h = h.replace(/data-n="(\d+)"([^>]*)>0</g, 'data-n="$1"$2>$1<');
 
@@ -216,7 +228,10 @@ function page(L) {
     (m, i) =>
       `<div class="pt" data-t="${i}">${D.projectTags[+i].map((x) => `<span>${esc(x)}</span>`).join("")}</div>`,
   );
-  h = h.replace('<span id="rot"></span>', `<span id="rot">${esc(D.rotating[0])}</span>`);
+  h = h.replace(
+    '<span id="rot"></span>',
+    `<span id="rot">${esc(D.rotating[0])}</span>`,
+  );
 
   /* page-level placeholders */
   h = h
@@ -244,7 +259,8 @@ fs.writeFileSync(path.join(ROOT, "index.html"), page("en"));
 fs.writeFileSync(path.join(ROOT, "ar/index.html"), page("ar"));
 
 const today = new Date().toISOString().slice(0, 10);
-const alt = (l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${url[l]}"/>`;
+const alt = (l) =>
+  `    <xhtml:link rel="alternate" hreflang="${l}" href="${url[l]}"/>`;
 const sm = ["en", "ar"]
   .map(
     (l) =>
@@ -260,4 +276,6 @@ fs.writeFileSync(
   `User-agent: *\nAllow: /\n\nSitemap: ${site}/sitemap.xml\n`,
 );
 
-console.log("Built: index.html, ar/index.html, sitemap.xml, robots.txt  (" + site + ")");
+console.log(
+  "Built: index.html, ar/index.html, sitemap.xml, robots.txt  (" + site + ")",
+);

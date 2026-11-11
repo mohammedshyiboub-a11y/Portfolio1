@@ -231,8 +231,16 @@ header {
   overflow: hidden;
   padding: 88px 0 72px;
   background:
-    radial-gradient(700px 380px at 82% 12%, rgba(79, 140, 255, 0.12), transparent 70%),
-    radial-gradient(500px 300px at 5% 60%, rgba(139, 124, 255, 0.08), transparent 70%);
+    radial-gradient(
+      700px 380px at 82% 12%,
+      rgba(79, 140, 255, 0.12),
+      transparent 70%
+    ),
+    radial-gradient(
+      500px 300px at 5% 60%,
+      rgba(139, 124, 255, 0.08),
+      transparent 70%
+    );
 }
 .hgrid {
   display: grid;
@@ -532,7 +540,11 @@ section.alt {
   gap: 22px;
   align-items: center;
   border-color: rgba(139, 124, 255, 0.5);
-  background: linear-gradient(120deg, rgba(139, 124, 255, 0.12), var(--card) 60%);
+  background: linear-gradient(
+    120deg,
+    rgba(139, 124, 255, 0.12),
+    var(--card) 60%
+  );
   margin-bottom: 24px;
 }
 .ach strong {
@@ -567,7 +579,11 @@ section.alt {
   border-radius: 12px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, rgba(79, 140, 255, 0.18), rgba(139, 124, 255, 0.18));
+  background: linear-gradient(
+    135deg,
+    rgba(79, 140, 255, 0.18),
+    rgba(139, 124, 255, 0.18)
+  );
   color: var(--a);
   transition: 0.25s;
 }
@@ -783,8 +799,20 @@ footer {
   border-block: 1px solid var(--bd);
   display: grid;
   gap: 12px;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
 }
 .mt {
   display: flex;
@@ -1138,7 +1166,12 @@ footer {
   left: -60%;
   width: 40%;
   height: 100%;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
   transform: skewX(-20deg);
   animation: swp 3.6s 2s infinite;
 }
@@ -1287,7 +1320,12 @@ footer {
   left: -40%;
   width: 30%;
   height: 100%;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.07), transparent);
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.07),
+    transparent
+  );
   transform: skewX(-20deg);
   animation: swp 5s 1s infinite;
 }
