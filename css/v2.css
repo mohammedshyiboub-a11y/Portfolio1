@@ -2998,3 +2998,320 @@ footer .wrap {
     inset-inline: calc((100% - 5 * 14px) / 12);
   }
 }
+
+/* ---------- Intro video (after the splash curtain) ---------- */
+.introv {
+  position: fixed;
+  inset: 0;
+  z-index: 998; /* just under the curtain (999) so the curtain opens onto it */
+  background: #080a0f;
+  display: grid;
+  place-items: center;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+.introv[hidden] {
+  display: none;
+}
+.introv.out {
+  opacity: 0;
+  pointer-events: none;
+}
+.introv video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #080a0f;
+}
+.ivbar {
+  position: absolute;
+  top: max(18px, env(safe-area-inset-top));
+  right: 18px;
+  z-index: 2;
+  display: flex;
+  gap: 10px;
+  direction: ltr;
+}
+.ivs {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(10, 13, 20, 0.6);
+  color: #f5f7fa;
+  font: 600 14px/1 "Inter", system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.ivsnd {
+  padding: 10px 16px;
+}
+.ivsnd .mx {
+  display: none;
+}
+.ivsnd[aria-pressed="false"] .mx {
+  display: block;
+}
+.ivsnd[aria-pressed="false"] .w1,
+.ivsnd[aria-pressed="false"] .w2 {
+  display: none;
+}
+.ivsnd.hint {
+  border-color: #8b7cff;
+  animation: ivpulse 1.6s ease-in-out infinite;
+}
+@keyframes ivpulse {
+  50% {
+    box-shadow: 0 0 0 7px rgba(139, 124, 255, 0.22);
+  }
+}
+.ivs:hover,
+.ivs:focus-visible {
+  background: rgba(79, 140, 255, 0.35);
+  border-color: #4f8cff;
+  outline: none;
+}
+/* the intro video is shown on every device, whatever the OS motion setting is */
+
+/* ---------- Services background: faint UI/UX icon pattern ----------
+   Icons come from assets/pattern-uiux.svg, used as a mask so the colour follows the theme.
+   Edges fade out so the pattern blends into the sections above and below. */
+#services {
+  position: relative;
+  isolation: isolate;
+}
+#services::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: #8fb4ff;
+  opacity: 0.17;
+  -webkit-mask:
+    url(../assets/pattern-uiux.svg) 0 0 / 900px 560px repeat,
+    linear-gradient(transparent, #000 14%, #000 86%, transparent);
+  -webkit-mask-composite: source-in;
+  mask:
+    url(../assets/pattern-uiux.svg) 0 0 / 900px 560px repeat,
+    linear-gradient(transparent, #000 14%, #000 86%, transparent);
+  mask-composite: intersect;
+}
+:root[data-theme="light"] #services::before {
+  background: #2563eb;
+  opacity: 0.13;
+}
+@media (max-width: 640px) {
+  /* phones: cards fill the width, so make the pattern denser/stronger and let it faintly show through them */
+  #services::before {
+    -webkit-mask-size: 480px 300px, 100% 100%;
+    mask-size: 480px 300px, 100% 100%;
+    opacity: 0.26;
+  }
+  :root[data-theme="light"] #services::before {
+    opacity: 0.2;
+  }
+  #services .card {
+    background: color-mix(in srgb, var(--card) 72%, transparent);
+  }
+}
+
+/* "Enter website" button at the end of the intro video.
+   js/intro.js sets --ivy (vertical position) and --ivf (text size) from the video's real size on screen,
+   so the button always sits in the empty space under the closing card, on every screen size. */
+.iven {
+  position: absolute;
+  left: 50%;
+  top: var(--ivy, 88%);
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65em;
+  padding: 0.95em 2em;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #4f8cff, #8b7cff);
+  color: #07111f;
+  font: 700 var(--ivf, 17px) / 1 "Inter", system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow:
+    0 14px 40px -10px rgba(79, 140, 255, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+  animation: ivenin 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transition:
+    filter 0.2s,
+    box-shadow 0.2s;
+}
+.iven[hidden] {
+  display: none;
+}
+.iven:hover,
+.iven:focus-visible {
+  filter: brightness(1.1);
+  box-shadow:
+    0 18px 50px -8px rgba(139, 124, 255, 0.8),
+    0 0 0 4px rgba(139, 124, 255, 0.35);
+  outline: none;
+}
+.iven svg {
+  width: 1.15em;
+  height: 1.15em;
+  transition: transform 0.2s;
+}
+.iven:hover svg {
+  transform: translateX(4px);
+}
+[dir="rtl"] .iven svg {
+  transform: scaleX(-1);
+}
+[dir="rtl"] .iven:hover svg {
+  transform: scaleX(-1) translateX(4px);
+}
+@keyframes ivenin {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 24px));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* ---------- Intro video: every screen size ----------
+   The video is always shown whole (never cropped): the right file is picked in js/intro.js
+   (16:9 for landscape, 9:16 for portrait) and object-fit keeps its shape inside any window. */
+.introv video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+@supports (height: 100dvh) {
+  .introv {
+    height: 100dvh;
+  }
+}
+/* small phones: smaller top buttons so they never cover the picture */
+@media (max-width: 420px) {
+  .ivbar {
+    right: 12px;
+    gap: 8px;
+  }
+  .ivs {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  .ivsnd {
+    padding: 8px 12px;
+  }
+}
+/* phones / small windows in landscape (little height): compact top buttons */
+@media (max-height: 520px) and (orientation: landscape) {
+  .ivbar {
+    top: max(10px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+  }
+  .ivs {
+    padding: 7px 14px;
+    font-size: 12px;
+  }
+}
+/* big screens / TVs */
+@media (min-width: 1800px) {
+  .ivs {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}
+
+/* ---------- Live intro (built with code, replaces the video) ----------
+   Board = 1280x720 (landscape) or 720x1280 (.lv-p portrait), scaled to fit by js/intro.js. */
+.introv {
+  background:
+    radial-gradient(60% 50% at 20% 15%, rgba(40, 80, 160, 0.28), transparent 70%),
+    radial-gradient(50% 45% at 85% 90%, rgba(110, 90, 220, 0.2), transparent 70%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 48px), #080a0f;
+}
+.ivstage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(var(--s, 1));
+  color: #f5f7fa;
+  font-family: "Inter", system-ui, sans-serif;
+  overflow: hidden;
+  direction: ltr;
+}
+.ivstage [data-a] { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.ivstage [data-a].lv-in { opacity: 1; transform: none; }
+.ivstage .lv-sc { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 56px 64px 70px; transform: none !important; }
+.ivstage .lv-pgb [data-a], .ivstage .lv-pgb { transform: none; }
+.ivstage h1 { margin: 0; font-size: 190px; line-height: 1; font-weight: 800; letter-spacing: -0.03em; }
+.ivstage h1 span:first-child { color: #4f8cff; } .ivstage h1 span:last-child { color: #9b8cff; } .ivstage h1 em { color: #6b7488; font-style: normal; font-weight: 400; padding: 0 6px; }
+.ivstage .lv-tt, .ivstage .lv-end { align-items: center; justify-content: center; text-align: center; }
+.ivstage .lv-tt hr { width: 560px; max-width: 80%; border: 0; height: 3px; background: #4f8cff; margin: 34px 0 22px; }
+.ivstage .lv-tt p { margin: 0; font-size: 34px; color: #98a2b6; }
+.ivstage header { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+.ivstage header small { color: #4f8cff; font-weight: 700; font-size: 16px; letter-spacing: 0.1em; }
+.ivstage h2 { margin: 6px 0; font-size: 54px; font-weight: 800; letter-spacing: -0.02em; }
+.ivstage header p { margin: 0; font-size: 22px; color: #98a2b6; }
+.ivstage .lv-tabs { display: flex; gap: 10px; flex-wrap: wrap; }
+.ivstage .lv-tabs span, .ivstage .lv-chips span { padding: 9px 18px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.16); background: rgba(255, 255, 255, 0.05); font-size: 16px; font-weight: 600; color: #b9c2d4; transition: 0.4s; }
+.ivstage .lv-tabs span.hi { border-color: #8b7cff; color: #fff; box-shadow: 0 0 0 3px rgba(139, 124, 255, 0.25); }
+.ivstage .lv-mock { position: relative; flex: 1; margin-top: 28px; display: flex; justify-content: center; min-height: 0; }
+.ivstage .lv-win { width: 100%; max-width: 1000px; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 18px; background: rgba(18, 22, 32, 0.9); padding: 0 22px 20px; display: flex; flex-direction: column; gap: 16px; overflow: hidden; }
+.ivstage .lv-bar { display: flex; gap: 7px; padding: 14px 0 0; } .ivstage .lv-bar i { width: 11px; height: 11px; border-radius: 50%; background: #ffbd2e; } .ivstage .lv-bar i:first-child { background: #ff5f57; } .ivstage .lv-bar i:last-child { background: #28c840; }
+.ivstage .lv-nav { display: flex; justify-content: space-between; align-items: center; } .ivstage .lv-nav u { width: 90px; height: 16px; border-radius: 8px; background: #4f8cff; } .ivstage .lv-nav span { display: flex; gap: 14px; } .ivstage .lv-nav s { width: 54px; height: 10px; border-radius: 5px; background: #2c3446; } .ivstage .lv-nav em { width: 74px; height: 26px; border-radius: 13px; background: #6f7dff; }
+.ivstage .lv-hero { display: flex; gap: 22px; flex: 1; min-height: 0; } .ivstage .lv-tx { flex: 1; display: flex; flex-direction: column; gap: 12px; justify-content: center; } .ivstage .lv-pic { flex: 1; border-radius: 14px; background: linear-gradient(135deg, #ff6cab, #7366ff); }
+.ivstage b { display: block; height: 11px; border-radius: 6px; background: #2c3446; } .ivstage .lv-tx b:first-child { height: 20px; background: #dfe6f5; }
+.ivstage .lv-btn { width: 120px; height: 34px; border-radius: 17px; background: #4f8cff; margin-top: 8px; box-shadow: 0 0 0 0 rgba(79, 140, 255, 0.5); } .ivstage .lv-btn.in { animation: lvp 1.4s ease-in-out infinite; } @keyframes lvp { 50% { box-shadow: 0 0 0 10px rgba(79, 140, 255, 0.18); } }
+.ivstage .lv-cds { display: flex; gap: 14px; } .ivstage .lv-cd { flex: 1; border-radius: 12px; background: #151b28; padding: 14px; display: flex; flex-direction: column; gap: 8px; } .ivstage .lv-cd i { width: 28px; height: 28px; border-radius: 8px; } .lv-g1 { background: #4f8cff; } .lv-g2 { background: #2fd4a0; } .lv-g3 { background: #ffc233; }
+.ivstage .lv-co { position: absolute; padding: 8px 14px; border-radius: 10px; background: #fff; color: #0b0f19; font-size: 15px; font-weight: 700; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); z-index: 3; white-space: nowrap; }
+.ivstage .lv-phs { display: flex; gap: 40px; align-items: center; justify-content: center; } .ivstage .lv-ph { height: 100%; max-height: 420px; aspect-ratio: 9 / 18; border-radius: 34px; border: 2px solid rgba(255, 255, 255, 0.18); background: #10141f; padding: 12px; } .ivstage .lv-scr { height: 100%; display: flex; flex-direction: column; gap: 12px; padding: 10px; }
+.ivstage .lv-big { height: 28%; border-radius: 14px; background: linear-gradient(135deg, #2b8cff, #7bd0ff); } .ivstage .lv-ph:last-child .lv-big { background: linear-gradient(135deg, #7366ff, #4f8cff); } .ivstage .lv-row { display: flex; gap: 10px; align-items: center; } .ivstage .lv-row i { width: 32px; height: 32px; border-radius: 9px; background: #4f8cff; flex: none; } .ivstage .lv-row b { flex: 1; } .ivstage .lv-pill { margin-top: auto; height: 34px; border-radius: 17px; background: #6f7dff; }
+.ivstage .lv-dash { flex-direction: row; padding: 18px 22px; } .ivstage .lv-side { width: 90px; display: flex; flex-direction: column; gap: 10px; } .ivstage .lv-side i { height: 28px; border-radius: 8px; background: #4f8cff; } .ivstage .lv-side s { height: 12px; border-radius: 6px; background: #2c3446; } .ivstage .lv-main { flex: 1; display: flex; flex-direction: column; gap: 14px; } .ivstage .lv-kp { display: flex; gap: 12px; } .ivstage .lv-kp u { flex: 1; height: 58px; border-radius: 10px; background: #151b28; }
+.ivstage .lv-chs { flex: 1; display: flex; gap: 16px; min-height: 0; } .ivstage .lv-bars { flex: 2; display: flex; align-items: flex-end; gap: 14px; padding: 16px; border-radius: 12px; background: #151b28; } .ivstage .lv-bars i { flex: 1; border-radius: 6px 6px 0 0; background: linear-gradient(#5aa0ff, #3a6fe0); transform-origin: bottom; } .ivstage .lv-don { flex: 1; border-radius: 12px; background: #151b28; position: relative; } .ivstage .lv-don::after { content: ""; position: absolute; inset: 14% 12%; border-radius: 50%; background: conic-gradient(#4f8cff 0 55%, #8b7cff 0 80%, #2fd4a0 0); -webkit-mask: radial-gradient(circle, transparent 44%, #000 45%); mask: radial-gradient(circle, transparent 44%, #000 45%); }
+.ivstage .lv-cols { display: flex; gap: 22px; width: 100%; max-width: 1000px; } .ivstage .lv-cols > div { flex: 1; } .ivstage h4 { margin: 0 0 12px; font-size: 18px; } .ivstage .lv-cc { height: 280px; border-radius: 14px; background: #151b28; padding: 18px; display: flex; flex-direction: column; gap: 10px; } .ivstage .lv-cc.k1 { background: transparent; border: 1px dashed rgba(255, 255, 255, 0.2); } .ivstage .lv-cc.k2 { background: linear-gradient(160deg, #4f8cff22, #8b7cff55); }
+.ivstage .lv-pgb { position: absolute; left: 64px; right: 64px; bottom: 34px; display: flex; gap: 8px; transform: none; } .ivstage .lv-pgb i { flex: 1; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.14); position: relative; opacity: 1; transform: none; } .ivstage .lv-pgb i::after { content: ""; position: absolute; inset: 0; width: 0; border-radius: 2px; background: #4f8cff; transition: width var(--d) linear; } .ivstage .lv-pgb i.in::after { width: 100%; }
+.ivstage .lv-end h1 { font-size: 150px; } .ivstage .lv-end > p { margin: 14px 0 26px; font-size: 26px; font-weight: 600; } .ivstage .lv-chips { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; } .ivstage .lv-end img { margin-top: 30px; height: 110px; width: auto; } .ivstage .lv-end small { margin-top: 8px; color: #98a2b6; font-size: 17px; }
+.ivstage .ivgo { margin-top: 30px; display: inline-flex; align-items: center; gap: 12px; padding: 18px 40px; border: 0; border-radius: 999px; background: linear-gradient(135deg, #4f8cff, #8b7cff); color: #07111f; font: 700 22px/1 "Inter", system-ui, sans-serif; cursor: pointer; box-shadow: 0 14px 40px -10px rgba(79, 140, 255, 0.65); } .ivstage .ivgo:hover, .ivstage .ivgo:focus-visible { filter: brightness(1.1); outline: none; box-shadow: 0 0 0 4px rgba(139, 124, 255, 0.4); } [dir="rtl"] .ivgo svg { transform: scaleX(-1); }
+.ivstage .ivgo:not(.lv-in) { pointer-events: none; }
+/* portrait board */
+.ivstage.lv-p .lv-sc { padding: 70px 50px 90px; } .ivstage.lv-p h1 { font-size: 150px; } .ivstage.lv-p .lv-end h1 { font-size: 130px; } .ivstage.lv-p h2 { font-size: 56px; } .ivstage.lv-p .lv-tabs { margin-top: 6px; } .ivstage.lv-p .lv-pic, .ivstage.lv-p .lv-don, .ivstage.lv-p .lv-side { display: none; } .ivstage.lv-p .lv-phs { gap: 18px; } .ivstage.lv-p .lv-ph { max-height: 560px; } .ivstage.lv-p .lv-cols { gap: 12px; } .ivstage.lv-p .lv-cc { height: 320px; padding: 12px; } .ivstage.lv-p .lv-pgb { left: 50px; right: 50px; bottom: 50px; } .ivstage.lv-p .lv-kp { flex-wrap: wrap; }
+
+/* ---------- Live intro: progress fill + phone design ---------- */
+.ivstage .lv-pgb i { height: 6px; background: rgba(255, 255, 255, 0.18); }
+.ivstage .lv-pgb i::after, .ivstage .lv-pgb i.lv-in::after { width: calc(var(--f, 0) * 100%); transition: none; background: linear-gradient(90deg, #4f8cff, #8b7cff); }
+/* small screens (phones): bigger text, readable at a glance */
+.ivstage.lv-sm header small { font-size: 22px; } .ivstage.lv-sm h2 { font-size: 64px; } .ivstage.lv-sm header p { font-size: 28px; }
+.ivstage.lv-sm .lv-tabs span, .ivstage.lv-sm .lv-chips span { font-size: 22px; padding: 11px 22px; }
+.ivstage.lv-sm .lv-co { font-size: 22px; padding: 11px 18px; } .ivstage.lv-sm h4 { font-size: 24px; }
+.ivstage.lv-sm .lv-tt p { font-size: 40px; } .ivstage.lv-sm .lv-end > p { font-size: 36px; } .ivstage.lv-sm .lv-end small { font-size: 23px; }
+.ivstage.lv-sm .lv-end img { height: 130px; } .ivstage.lv-sm .ivgo { font-size: 30px; padding: 22px 50px; }
+.ivstage.lv-sm .lv-pgb i { height: 8px; }
+/* portrait layout: every mock fills the tall board */
+.ivstage.lv-p .lv-mock { align-items: center; }
+.ivstage.lv-p .lv-win { height: auto; flex: none; gap: 22px; }
+.ivstage.lv-p .lv-hero { flex-direction: column; flex: none; gap: 20px; } .ivstage.lv-p .lv-pic { display: block; height: 300px; flex: none; }
+.ivstage.lv-p .lv-tx { padding: 8px 0; gap: 16px; } .ivstage.lv-p .lv-cd { padding: 20px; }
+.ivstage.lv-p .lv-dash { flex-direction: column; } .ivstage.lv-p .lv-kp u { height: 84px; }
+.ivstage.lv-p .lv-chs { flex-direction: column; flex: none; } .ivstage.lv-p .lv-bars { height: 360px; flex: none; } .ivstage.lv-p .lv-don { display: block; height: 260px; flex: none; }
+.ivstage.lv-p .lv-ph { width: 300px; height: 620px; aspect-ratio: auto; max-height: none; }
+.ivstage.lv-p .lv-cc { height: 470px; }
+/* donut is always a true circle */
+.ivstage .lv-don::after { inset: auto; top: 10%; left: 50%; height: 80%; aspect-ratio: 1; width: auto; transform: translateX(-50%); }
+/* Skip button disappears as soon as the Enter button shows */
+.ivs[hidden], .ivbar[hidden] { display: none !important; }

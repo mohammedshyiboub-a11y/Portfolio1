@@ -409,20 +409,19 @@ bindNums();
    Intro curtain, cursor glow, magnetic buttons, parallax orbs and the particle canvas. */
 (function () {
   var c0 = document.getElementById("cur0");
-  if (calm) {
-    c0 && c0.remove();
-    return;
-  }
-
   /* ----- START: 14a. Intro curtain -----
-     Opens the curtain after 0.85s and removes it from the page. */
-  setTimeout(function () {
-    c0.classList.add("go");
+     Opens the curtain after 0.85s and removes it from the page.
+     Runs on every device (also with reduced motion) so the logo splash + intro video always show. */
+  if (c0)
     setTimeout(function () {
-      c0.remove();
-    }, 1100);
-  }, 850);
+      c0.classList.add("go");
+      setTimeout(function () {
+        c0.remove();
+      }, 1100);
+    }, 850);
   /* ----- END: 14a. Intro curtain ----- */
+
+  if (calm) return; /* the extra effects below stay off for reduced motion */
 
   /* ----- START: 14b. Cursor glow -----
      A soft light that eases toward the mouse position. */

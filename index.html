@@ -199,6 +199,16 @@
     </div>
     <!-- ========== END: Intro curtain ========== -->
 
+    <!-- ========== START: Intro video ==========
+     LIVE intro (HTML/CSS/JS, no video file): plays right after the splash curtain, with sound (assets/audio/intro-voice.mp3).
+     Logic: js/intro.js - styles: end of css/v2.css ("Live intro"). Add ?intro=0 to the address to skip it. -->
+    <div class="introv" id="iv" role="dialog" aria-label="UI/UX intro" hidden>
+      <div class="ivstage" id="ivst"></div>
+      <audio id="iva" preload="auto"></audio>
+      <div class="ivbar"><button class="ivs" id="ivs" type="button">Skip</button></div>
+    </div>
+    <!-- ========== END: Intro video ========== -->
+
     <!-- ========== START: Cursor glow ==========
      Soft light that follows the mouse (desktop only). -->
     <div class="cur" id="glow"></div>
@@ -842,6 +852,7 @@
     <script src="js/lang/en.js"></script>
     <script src="js/lang/ar.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/intro.js"></script>
     <script src="js/v2.js"></script>
     <!-- ========== END: Scripts ========== -->
   </body>
