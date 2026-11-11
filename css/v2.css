@@ -3315,3 +3315,51 @@ footer .wrap {
 .ivstage .lv-don::after { inset: auto; top: 10%; left: 50%; height: 80%; aspect-ratio: 1; width: auto; transform: translateX(-50%); }
 /* Skip button disappears as soon as the Enter button shows */
 .ivs[hidden], .ivbar[hidden] { display: none !important; }
+
+
+/* ---------- Live intro: light theme ---------- */
+.introv.iv-light {
+  background:
+    radial-gradient(60% 50% at 20% 15%, rgba(37, 99, 235, 0.12), transparent 70%),
+    radial-gradient(50% 45% at 85% 90%, rgba(139, 124, 255, 0.10), transparent 70%),
+    repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.035) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(90deg, rgba(15, 23, 42, 0.035) 0 1px, transparent 1px 48px), #f6f8fc;
+}
+.introv.iv-light .ivstage { color: #172033; }
+.introv.iv-light .ivstage .lv-tt p,
+.introv.iv-light .ivstage header p,
+.introv.iv-light .ivstage .lv-end small { color: #64748b; }
+.introv.iv-light .ivstage .lv-tabs span,
+.introv.iv-light .ivstage .lv-chips span {
+  border-color: rgba(15, 23, 42, 0.14);
+  background: rgba(255, 255, 255, 0.72);
+  color: #475569;
+}
+.introv.iv-light .ivstage .lv-tabs span.hi {
+  border-color: #4f8cff;
+  color: #1e40af;
+  box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.16);
+}
+.introv.iv-light .ivstage .lv-win {
+  border-color: rgba(15, 23, 42, 0.14);
+  background: rgba(255, 255, 255, 0.92);
+}
+.introv.iv-light .ivstage .lv-cd,
+.introv.iv-light .ivstage .lv-kp u,
+.introv.iv-light .ivstage .lv-chs > *,
+.introv.iv-light .ivstage .lv-cc,
+.introv.iv-light .ivstage .lv-ph { background-color: #e9eef7; }
+.introv.iv-light .ivstage .lv-bar i:not(:first-child) { opacity: .75; }
+.introv.iv-light .ivstage .lv-nav s,
+.introv.iv-light .ivstage b,
+.introv.iv-light .ivstage .lv-side s { background: #cbd5e1; }
+.introv.iv-light .ivstage .lv-tx b:first-child { background: #334155; }
+.introv.iv-light .ivstage .lv-pgb i { background: rgba(15, 23, 42, 0.14); }
+.introv.iv-light .ivstage .lv-co { background: #172033; color: #fff; }
+.introv.iv-light .ivstage .lv-cc.k1 { background: transparent; border-color: rgba(15, 23, 42, 0.22); }
+.introv.iv-light .ivstage .ivgo {
+  background: linear-gradient(135deg, #4f8cff, #8b7cff);
+  color: #fff;
+}
+
+[dir="rtl"] .ivstage { font-family: "IBM Plex Sans Arabic", sans-serif; }
