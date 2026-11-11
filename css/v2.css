@@ -3363,3 +3363,90 @@ footer .wrap {
 }
 
 [dir="rtl"] .ivstage { font-family: "IBM Plex Sans Arabic", sans-serif; }
+
+/* ---------- Intro buttons: exactly the same look as the website buttons (.btn / .btn.pri.big) ----------
+   Colours come from the same theme variables, so dark / light always match the site. */
+.introv .ivbar .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--bd);
+  background: var(--card);
+  color: var(--tx);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  cursor: pointer;
+}
+.introv .ivbar .btn:hover,
+.introv .ivbar .btn:focus-visible {
+  background: var(--card);
+  border-color: var(--a);
+  outline: none;
+}
+.introv .ivbar .ivsnd2 { color: var(--a); border-color: var(--a); }
+.introv .ivbar .ivsnd2 svg { flex: none; }
+/* Enter button: same size as the hero's main button on the site (52px tall, 16px text),
+   sized against the board scale so it is never bigger or smaller than the real one. */
+.introv .ivstage .btn.ivgo {
+  --k: calc(1 / var(--s, 1));
+  margin-top: calc(30px * var(--k));
+  height: calc(52px * var(--k));
+  padding: 0 calc(30px * var(--k));
+  gap: calc(8px * var(--k));
+  font-family: inherit;
+  font-size: calc(16px * var(--k));
+  font-weight: 600;
+  line-height: 1;
+  border-radius: 999px;
+  border: 1px solid var(--a);
+  background: var(--a);
+  color: var(--on-a);
+  filter: none;
+  box-shadow: 0 calc(14px * var(--k)) calc(34px * var(--k)) calc(-12px * var(--k)) rgba(79, 140, 255, 0.7);
+}
+.introv .ivstage .btn.ivgo:hover,
+.introv .ivstage .btn.ivgo:focus-visible {
+  background: var(--a-hover, var(--a));
+  filter: none;
+  outline: none;
+}
+.introv .ivstage .btn.ivgo svg {
+  width: calc(17px * var(--k));
+  height: calc(17px * var(--k));
+  flex: none;
+}
+.introv .ivstage .btn.ivgo:hover svg.ar { translate: calc(5px * var(--k)) 0; }
+[dir="rtl"] .introv .ivstage .btn.ivgo:hover svg.ar { translate: calc(-5px * var(--k)) 0; }
+
+/* ---------- Arabic intro: everything reads and starts from the RIGHT ---------- */
+.ivstage[dir="rtl"] { direction: rtl; text-align: start; }
+.ivstage[dir="rtl"] .lv-tt h1,
+.ivstage[dir="rtl"] .lv-end h1 { direction: ltr; unicode-bidi: isolate; } /* "UI/UX" stays UI/UX */
+.ivstage[dir="rtl"] .lv-tt,
+.ivstage[dir="rtl"] .lv-end { text-align: center; }
+.ivstage[dir="rtl"] .lv-pgb i::after { left: auto; right: 0; }
+.ivstage[dir="rtl"] .lv-bars { transform-origin: right; }
+
+/* ---------- Start gate: centred "Tap to start" button before the intro ---------- */
+.ivgate {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  padding: 24px;
+}
+.ivgate img { width: min(240px, 56vw); height: auto; }
+.introv .ivgate .btn.ivstart { height: 52px; padding: 0 30px; font-family: inherit; font-size: 16px; font-weight: 600; line-height: 1; gap: 8px; border-radius: 999px; box-shadow: 0 14px 34px -12px rgba(79, 140, 255, 0.7); animation: ivpulse 1.8s ease-in-out infinite; }
+.introv .ivgate .btn.ivstart svg { flex: none; }
+.introv:has(.ivgate) .ivstage { visibility: hidden; }

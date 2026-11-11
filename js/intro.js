@@ -6,7 +6,7 @@
    - The animation is drawn on a 1280x720 (landscape) or 720x1280 (portrait) board that is scaled to fit
      any screen, and it follows the voice-over file (assets/audio/intro-voice.mp3) as its clock.
    - Plays on every visit (not when switching EN <-> AR). ?intro=0 skips it, ?intro=1 forces it.
-   - Skip button, Esc, or the Enter button closes it. Safe to remove: this file, its <script> tag,
+   - Esc jumps straight to the "Enter website" button (Esc again closes). The Skip button and the Enter button close it. Safe to remove: this file, its <script> tag,
      the "Intro" block in template.html.
    Timeline: every element with data-a="start" (and optional data-b="end") appears at that second.
    ===================================================================== */
@@ -21,7 +21,7 @@
   var light = document.documentElement.getAttribute("data-theme") === "light";
   var base = /\/ar\/?(index\.html)?$/.test(location.pathname) || ar ? "../" : "";
   var tr = ar ? {
-    skip: "تخطي", enter: "دخول للموقع", tagline: "تصميم جميل. وتجربة تعمل بذكاء.",
+    skip: "تخطي", enter: "دخول للموقع", sound: "اضغط لتشغيل الصوت", start: "اضغط للبدء", tagline: "تصميم جميل. وتجربة تعمل بذكاء.",
     websites: "المواقع الإلكترونية", mobile: "تطبيقات الموبايل", dashboards: "لوحات التحكم", cases: "دراسات الحالة",
     layout: "التخطيط · الألوان · الخطوط", navigation: "التنقل · التسلسل البصري",
     components: "المكونات · الحركة", flows: "مسارات الاستخدام · التغذية الراجعة",
@@ -34,7 +34,7 @@
     inEvery: "في كل تصميم", chips: ["بحث المستخدم", "تصميم الواجهات", "النماذج الأولية", "تجربة المستخدم"],
     role: "محمد شيبوب هدهد · مصمم UI/UX"
   } : {
-    skip: "Skip", enter: "Enter website", tagline: "Looks right. Works right.",
+    skip: "Skip", enter: "Enter website", sound: "Tap for sound", start: "Tap to start", tagline: "Looks right. Works right.",
     websites: "Websites", mobile: "Mobile Apps", dashboards: "Dashboards", cases: "Case Studies",
     layout: "Layout · Color · Type", navigation: "Navigation · Hierarchy",
     components: "Components · Motion", flows: "Flows · Feedback",
@@ -77,7 +77,7 @@
       '</p></div><div class="lv-tabs">' + tabs.map(function (t, i) { return '<span data-h="' + (a + 0.7 + i * m) + "-" + (a + 0.7 + (i + 1) * m) + '">' + t + "</span>"; }).join("") +
       '</div></header><div class="lv-mock">' + mock + "</div></section>";
   }
-  function co(t, a, b, x, y) { return '<div class="lv-co" data-a="' + a + '" data-b="' + b + '" style="left:' + x + "%;top:" + y + '%">' + t + "</div>"; }
+  function co(t, a, b, x, y) { return '<div class="lv-co" data-a="' + a + '" data-b="' + b + '" style="' + (ar ? "right:" : "left:") + x + "%;top:" + y + '%">' + t + "</div>"; }
   var cards = [1, 2, 3].map(function (i) { return '<div class="lv-cd"><i class="lv-g' + i + '"></i>' + L(80) + L(55) + "</div>"; }).join("");
   var web = '<div class="lv-win"><div class="lv-bar"><i></i><i></i><i></i></div><div class="lv-nav"><u></u><span><s></s><s></s><s></s></span><em></em></div><div class="lv-hero"><div class="lv-tx">' + L(75) + L(55) + L(40) + '<div class="lv-btn" data-a="3.6"></div></div><div class="lv-pic"></div></div><div class="lv-cds">' + cards + "</div></div>" +
     co(tr.clearNav, 3.7, 5, 38, 8) + co(tr.primary, 4.2, 5, 14, 52);
@@ -97,7 +97,7 @@
     sc(4, tr.cases, tr.caseSub, [tr.screens, tr.research], 10, 12.2, cs) +
     '<div class="lv-pgb" data-a="2.2" data-b="12.2">' + pg + "</div>" +
     '<section class="lv-sc lv-end" data-a="12.2"><h1><span>UI</span><em>/</em><span>UX</span></h1><p>' + tr.inEvery + '</p><div class="lv-chips">' + chips + '</div><img src="' + base + 'assets/logo.png" alt="" width="320" height="152"><small>' + tr.role + '</small>' +
-    '<button class="ivgo" id="iven" type="button" data-a="17.3">' + tr.enter + '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></section>';
+    '<button class="btn pri big ivgo" id="iven" type="button" data-a="17.3"><span>' + tr.enter + '</span><svg class="ar" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></section>';
   var enter = document.getElementById("iven"),
     els = st.querySelectorAll("[data-a]"),
     hs = st.querySelectorAll("[data-h]"),
@@ -121,15 +121,22 @@
   addEventListener("resize", fit);
   addEventListener("orientationchange", fit);
 
-  /* ---------- clock: the voice-over file drives everything ---------- */
-  var closed = false, started = false, useAudio = true, t0 = 0, raf = 0;
+  /* ---------- clock: the voice-over file drives everything ----------
+     One continuous clock: it follows the audio while the audio is really playing, and keeps counting on its own
+     when the audio is blocked, paused or finished - so starting the sound late never makes the clock jump back. */
+  var END_T = 17.3; /* the second the "Enter website" button appears */
+  var closed = false, started = false, raf = 0, soundOn = false, synced = false, hint = null;
+  var ref = { t: 0, p: performance.now() };
   au.src = base + "assets/audio/intro-voice.mp3";
   au.preload = "auto";
   au.muted = false;
   au.volume = 1;
-  au.currentTime = 0;
-  au.addEventListener("error", function () { useAudio = false; });
-  function now() { return useAudio && au.currentTime > 0 ? au.currentTime : (performance.now() - t0) / 1000; }
+  function audioPlaying() { return synced && !au.paused && !au.ended && au.currentTime > 0; }
+  function now() {
+    if (audioPlaying()) { ref.t = au.currentTime; ref.p = performance.now(); return ref.t; }
+    return ref.t + (performance.now() - ref.p) / 1000;
+  }
+  function jump(t) { ref.t = t; ref.p = performance.now(); }
   function frame() {
     var t = now();
     els.forEach(function (e) {
@@ -144,9 +151,10 @@
       var r = e.getAttribute("data-h").split("-");
       e.classList.toggle("lv-hi", t >= +r[0] && t < +r[1]);
     });
-    if (t >= 17.3 && !skip.hidden) {
+    if (t >= END_T && !skip.hidden) {
       skip.hidden = true;
       skip.style.display = "none";
+      hideHint();
       try { enter.focus({ preventScroll: true }); } catch (e) {}
     }
     raf = requestAnimationFrame(frame);
@@ -154,7 +162,8 @@
   function run() {
     if (started || closed) return;
     started = true;
-    t0 = performance.now();
+    removeGate();
+    jump(0);
     frame();
   }
   function close() {
@@ -162,43 +171,102 @@
     closed = true;
     cancelAnimationFrame(raf);
     removeEventListener("resize", fit);
+    stopWatching();
+    hideHint();
     box.classList.add("out");
     document.documentElement.style.overflow = "";
     setTimeout(function () { au.pause(); box.remove(); }, 700);
   }
-  /* try sound at once. If the browser blocks it, the intro still starts (no extra screen) and the voice-over
-     joins, in sync, on the visitor's first touch / click / key / scroll anywhere on the page */
-  function late() {
-    ["pointerdown", "touchstart", "keydown", "wheel", "click"].forEach(function (ev) {
-      removeEventListener(ev, onGesture, true);
-    });
+
+  /* ---------- sound ----------
+     Browsers only allow sound after the visitor touches the page. We try at once; if it is blocked the intro still
+     starts, a small "Tap for sound" button (same style as the site buttons) appears, and the FIRST click / tap / key
+     anywhere starts the voice-over exactly where the animation is. We keep trying until the sound really plays. */
+  var GEST = ["pointerdown", "mousedown", "touchend", "click", "keydown"];
+  function stopWatching() {
+    GEST.forEach(function (ev) { removeEventListener(ev, onGesture, true); });
   }
-  function onGesture() {
-    if (closed || !started) return;
-    late();
-    try { au.currentTime = Math.min((performance.now() - t0) / 1000, 17); } catch (e) {}
+  function hideHint() { if (hint) { hint.remove(); hint = null; } }
+  function showHint() {
+    if (hint || soundOn || closed || now() >= END_T) return;
+    hint = document.createElement("button");
+    hint.type = "button";
+    hint.className = "btn ivsnd2";
+    hint.innerHTML = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>' + tr.sound + "</span>";
+    hint.addEventListener("click", startSound);
+    skip.parentNode.insertBefore(hint, skip);
+  }
+  function soundStarted() { soundOn = true; stopWatching(); hideHint(); }
+  function startSound() {
+    if (closed || !started || soundOn) return;
+    var t = now();
+    if (t >= END_T) { stopWatching(); hideHint(); return; } /* the voice-over is over anyway */
+    var at = performance.now();
+    try { au.currentTime = t; } catch (e) {}
     var p = au.play();
-    if (p && p.catch) p.catch(function () { useAudio = false; });
+    /* some browsers ignore the seek until the file is ready: re-check once it really plays, then follow the audio */
+    function ok() {
+      var want = t + (performance.now() - at) / 1000;
+      if (Math.abs(au.currentTime - want) > 0.4) { try { au.currentTime = want; } catch (e) {} }
+      synced = true;
+      soundStarted();
+    }
+    if (p && p.then) p.then(ok, showHint); else ok();
+  }
+  function onGesture(e) {
+    if (e.type === "keydown" && (e.key === "Escape" || e.key === "Tab" || e.key === "Shift")) return;
+    var el = e.target;
+    if (el && el.closest && el.closest("#ivs, #iven")) return; /* Skip / Enter: no need for sound */
+    startSound();
   }
   function begin() {
+    if (started || closed) return;
     var p = au.play();
     if (!p || !p.then) return run();
-    p.then(run, function () {
+    p.then(function () { soundOn = true; synced = true; run(); }, function () {
       run();
-      ["pointerdown", "touchstart", "keydown", "wheel", "click"].forEach(function (ev) {
-        addEventListener(ev, onGesture, { capture: true, passive: true });
-      });
+      showHint();
+      GEST.forEach(function (ev) { addEventListener(ev, onGesture, { capture: true, passive: true }); });
     });
+  }
+  /* ---------- start gate: one centred button the visitor must press, so the voice-over can always play ---------- */
+  var gateEl = null;
+  function removeGate() { if (gateEl) { gateEl.remove(); gateEl = null; } }
+  function gate() {
+    if (closed || started || gateEl) return;
+    gateEl = document.createElement("div");
+    gateEl.className = "ivgate";
+    gateEl.innerHTML = '<img src="' + base + 'assets/logo.png" alt="" width="240" height="114"><button type="button" class="btn pri big ivstart"><span>' + tr.start + '</span><svg class="ar" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>';
+    box.appendChild(gateEl);
+    var b = gateEl.querySelector("button");
+    b.addEventListener("click", function () { removeGate(); begin(); }); /* play() runs inside the click = allowed */
+    try { b.focus({ preventScroll: true }); } catch (e) {}
   }
   var waited = 0;
   (function wait() { /* wait until the splash curtain is completely gone */
-    if (closed) return;
-    if (!document.getElementById("cur0") || waited > 4000) return begin();
+    if (closed || started) return;
+    if (!document.getElementById("cur0") || waited > 4000) return gate();
     waited += 60;
     setTimeout(wait, 60);
   })();
 
+  /* ---------- buttons & keys ---------- */
+  function goEnd() { /* jump to the final screen where the "Enter website" button is */
+    if (closed) return;
+    if (!started) run();
+    jump(END_T);
+    synced = false;
+    au.pause();
+    soundOn = true;
+    stopWatching();
+    hideHint();
+    cancelAnimationFrame(raf);
+    frame();
+  }
   enter.addEventListener("click", close);
   skip.addEventListener("click", close);
-  addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+  addEventListener("keydown", function (e) {
+    if (e.key !== "Escape" || closed) return;
+    if (started && now() >= END_T) close(); else goEnd();
+  });
 })();
