@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://YOUR-DOMAIN.com/sitemap.xml
+Sitemap: https://mohammedshyiboub-a11y.github.io/Portfolio1/sitemap.xml

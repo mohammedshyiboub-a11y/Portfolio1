@@ -11,10 +11,7 @@
 var calm = false;
 var L = document.documentElement.lang == "ar" ? "ar" : "en";
 if (!window.LANG[L]) L = "en";
-var BASE =
-  L == "ar"
-    ? "../"
-    : ""; /* the Arabic page lives in /ar/, so assets are one level up */
+var BASE = L == "ar" ? "../" : ""; /* the Arabic page lives in /ar/, so assets are one level up */
 /* ---------- END: 1. Global state & helpers ---------- */
 
 /* ---------- START: 1b. Theme (dark by default, light on request) ----------
@@ -71,12 +68,7 @@ function themeLabel() {
   b.title = light ? d.thD : d.thL;
 }
 document.getElementById("theme").onclick = function () {
-  setTheme(
-    document.documentElement.getAttribute("data-theme") == "light"
-      ? "dark"
-      : "light",
-    true,
-  );
+  setTheme(document.documentElement.getAttribute("data-theme") == "light" ? "dark" : "light", true);
 };
 readPal();
 /* ---------- END: 1b. Theme ---------- */
@@ -170,8 +162,7 @@ function render() {
       })
       .join("");
     var out = "";
-    for (var i = 0; i < n; i++)
-      out += h; /* repeated so the loop never shows a gap */
+    for (var i = 0; i < n; i++) out += h; /* repeated so the loop never shows a gap */
     return out;
   }
   document.getElementById("m1").innerHTML = mk(sk[0].items, 4);
@@ -188,13 +179,7 @@ function render() {
         '</h3><div class="skc">' +
         g.items
           .map(function (s, i) {
-            return (
-              "<span" +
-              (i < (g.core || 0) ? ' class="pr"' : "") +
-              ">" +
-              s +
-              "</span>"
-            );
+            return "<span" + (i < (g.core || 0) ? ' class="pr"' : "") + ">" + s + "</span>";
           })
           .join("") +
         "</div></div>"
@@ -257,12 +242,10 @@ var io =
     : null;
 
 function watch() {
-  document
-    .querySelectorAll(".rv:not(.in),.tl:not(.in)")
-    .forEach(function (n, k) {
-      n.style.transitionDelay = (k % 4) * 90 + "ms"; /* small stagger */
-      io ? io.observe(n) : n.classList.add("in");
-    });
+  document.querySelectorAll(".rv:not(.in),.tl:not(.in)").forEach(function (n, k) {
+    n.style.transitionDelay = (k % 4) * 90 + "ms"; /* small stagger */
+    io ? io.observe(n) : n.classList.add("in");
+  });
 }
 /* ---------- END: 5. Reveal on scroll ---------- */
 
@@ -303,8 +286,7 @@ addEventListener(
     secs.forEach(function (s) {
       if (s.offsetTop <= y) c = s.id;
     });
-    if (c == "technical")
-      c = "skills"; /* Technical Background has no menu link: keep Skills lit */
+    if (c == "technical") c = "skills"; /* Technical Background has no menu link: keep Skills lit */
     document.querySelectorAll(".links a").forEach(function (a) {
       a.classList.toggle("on", a.getAttribute("href") == "#" + c);
     });
@@ -325,8 +307,7 @@ addEventListener(
   "scroll",
   function () {
     var h = document.documentElement.scrollHeight - innerHeight;
-    bar.style.transform =
-      "scaleX(" + (h > 0 ? Math.min(scrollY / h, 1) : 0) + ")";
+    bar.style.transform = "scaleX(" + (h > 0 ? Math.min(scrollY / h, 1) : 0) + ")";
   },
   { passive: true },
 );
@@ -357,19 +338,11 @@ addEventListener("pointermove", function (e) {
   var r = c.getBoundingClientRect();
   c.style.setProperty("--mx", e.clientX - r.left + "px");
   c.style.setProperty("--my", e.clientY - r.top + "px");
-  if (
-    !calm &&
-    e.pointerType == "mouse" &&
-    c.parentNode.classList.contains("proj")
-  ) {
+  if (!calm && e.pointerType == "mouse" && c.parentNode.classList.contains("proj")) {
     var x = (e.clientX - r.left) / r.width - 0.5,
       y = (e.clientY - r.top) / r.height - 0.5;
     c.style.transform =
-      "perspective(900px) rotateY(" +
-      x * 3 +
-      "deg) rotateX(" +
-      -y * 3 +
-      "deg) translateY(-4px)";
+      "perspective(900px) rotateY(" + x * 3 + "deg) rotateX(" + -y * 3 + "deg) translateY(-4px)";
   }
 });
 document.querySelectorAll(".proj .card").forEach(function (c) {
@@ -593,8 +566,7 @@ bindNums();
           y = a.y - b.y,
           d2 = x * x + y * y;
         if (d2 < 11000) {
-          cx.strokeStyle =
-            "rgba(" + pal.line + "," + (1 - d2 / 11000) * pal.lineA + ")";
+          cx.strokeStyle = "rgba(" + pal.line + "," + (1 - d2 / 11000) * pal.lineA + ")";
           cx.lineWidth = 1;
           cx.beginPath();
           cx.moveTo(a.x, a.y);
@@ -608,8 +580,7 @@ bindNums();
         mdy = a.y - my,
         md = mdx * mdx + mdy * mdy;
       if (md < 26000) {
-        cx.strokeStyle =
-          "rgba(" + pal.mouse + "," + (1 - md / 26000) * pal.mouseA + ")";
+        cx.strokeStyle = "rgba(" + pal.mouse + "," + (1 - md / 26000) * pal.mouseA + ")";
         cx.beginPath();
         cx.moveTo(a.x, a.y);
         cx.lineTo(mx, my);

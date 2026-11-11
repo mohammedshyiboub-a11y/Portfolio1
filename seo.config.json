@@ -1,6 +1,6 @@
 {
   "_help": "Edit this file, then run: node build.js   (it regenerates index.html, ar/index.html, sitemap.xml and robots.txt)",
-  "siteUrl": "https://YOUR-DOMAIN.com",
+  "siteUrl": "https://mohammedshyiboub-a11y.github.io/Portfolio1",
   "sameAs": [
     "https://www.linkedin.com/in/mohammed-shyiboub-hedhed",
     "https://www.behance.net/mohammeshyibou"
@@ -9,22 +9,28 @@
     "Mohamed Shyiboub",
     "Mohammed Shyiboub",
     "Mohamed Shyiboub Hedhed",
-    "محمد شيبوب"
+    "Mohamed Shiboub",
+    "Mohammed Shiboub",
+    "Shiboub",
+    "Shyiboub",
+    "محمد شيبوب",
+    "محمد شيبوب هدهد",
+    "شيبوب"
   ],
   "en": {
-    "title": "Mohammed Shyiboub Hedhed | UI/UX Designer in Egypt",
-    "description": "Mohamed Shyiboub Hedhed is a UI/UX Designer in Egypt specializing in UX Research, User Interface Design, Wireframing, Prototyping and Figma. محمد شيبوب مصمم واجهات وتجربة مستخدم.",
+    "title": "Mohammed Shiboub (Shyiboub) | UI/UX Designer – Portfolio, Egypt",
+    "description": "Mohammed Shiboub (Shyiboub) Hedhed – UI/UX designer from Egypt. Portfolio of mobile app and web interface design, UX research, wireframes, prototypes and Figma case studies.",
     "ogLocale": "en_US",
     "siteName": "Mohammed Shyiboub Hedhed – Portfolio"
   },
   "ar": {
-    "title": "محمد شيبوب هدهد – مصمم UI/UX | معرض الأعمال",
-    "description": "Mohamed Shyiboub Hedhed is a UI/UX Designer in Egypt specializing in UX Research, User Interface Design, Wireframing, Prototyping and Figma. محمد شيبوب مصمم واجهات وتجربة مستخدم.",
+    "title": "محمد شيبوب | مصمم واجهات مستخدم UI/UX Designer – معرض الأعمال",
+    "description": "محمد شيبوب هدهد – مصمم واجهات وتجربة مستخدم (UI/UX Designer) من مصر. معرض أعمال يضم تصميم تطبيقات الموبايل والمواقع، أبحاث المستخدمين، النماذج الأولية ودراسات حالة على Figma.",
     "ogLocale": "ar_EG",
     "siteName": "محمد شيبوب هدهد – معرض الأعمال"
   },
   "keywords": {
-    "en": "Mohammed Shyiboub, Mohamed Shyiboub, Mohammed Shyiboub Hedhed, Mohammed Shyiboub portfolio, UI/UX designer Egypt, Figma designer, UX research, Wireframing, Prototyping, Sharqia",
-    "ar": "محمد شيبوب, محمد شيبوب هدهد, محمد شيبوب مصمم, محمد شيبوب UI/UX, مصمم واجهات مستخدم مصر, معرض أعمال محمد شيبوب, الشرقية, منيا القمح"
+    "en": "Mohammed Shiboub, Mohamed Shiboub, Shiboub, Shyiboub, Mohammed Shyiboub, Mohammed Shyiboub Hedhed, UI UX designer, UI/UX designer Egypt, UI designer, Figma designer, UX research, Wireframing, Prototyping, Sharqia",
+    "ar": "شيبوب, محمد شيبوب, محمد شيبوب هدهد, محمد شيبوب مصمم, مصمم واجهات مستخدم, مصمم واجهات المستخدم, مصمم UI UX, مصمم UI/UX مصر, معرض أعمال محمد شيبوب, الشرقية, منيا القمح"
   }
 }
