@@ -107,19 +107,20 @@ function seoHead(L) {
     },
     {
       "@type": "CreativeWork",
+      name: d.p2T,
+      datePublished: "2026-11",
+      description: d.p2D,
+      inLanguage: L,
+      author: { "@id": personId },
+      url: "https://www.behance.net/gallery/258550841/LearnVerse-A-Smarter-Way-to-Learn-and-Grow",
+    },
+    {
+      "@type": "CreativeWork",
       name: d.p1T,
       description: d.p1D,
       inLanguage: L,
       author: { "@id": personId },
       url: "https://www.behance.net/gallery/251943223/Mazaq-Food-Delivery-App-UXUI-Case-Study",
-    },
-    {
-      "@type": "CreativeWork",
-      name: d.p2T,
-      description: d.p2D,
-      inLanguage: L,
-      author: { "@id": personId },
-      url: "https://www.behance.net/gallery/249426463/Skillo-App-Mobile-UIUX-Design-Case-Study",
     },
   ];
   const ld = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(

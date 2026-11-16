@@ -38,11 +38,14 @@ window.LANG.en = {
     eS: "UI/UX practice and training, backed by front-end and mobile development.",
     cT: "Courses & short programs",
     pT: "Projects",
-    pS: "Mobile app UI/UX case studies. See the full work on Behance.",
+    pS: "UI/UX case studies across mobile and web. See the full work on Behance.",
     p1T: "Mazaq – Food delivery app",
     p1D: "A food delivery mobile experience with clear navigation and a smooth ordering journey. User-centered screens and interaction flows make browsing restaurants and placing orders easier.",
-    p2T: "Skillo – E-learning mobile app",
-    p2D: "An e-learning mobile app that makes educational content easier to discover and access. Intuitive, user-centered interfaces support a clear and engaging learning experience.",
+    p2T: "LearnVerse – A Smarter Way to Learn and Grow",
+    p2D: "An e-learning website and student dashboard: 42 web pages covering course discovery, instructor profiles and session booking, an AI learning assistant, a personalized roadmap and portfolio review. Seven key design decisions turn learner needs into a structured, supportive experience.",
+    p2Dt: "November 2026",
+    pKl: "Key decisions:",
+    p2K: "Integrated portfolio evaluation · Instructor profiles & session booking · AI learning assistant · Centralized student profile · Personalized roadmap · Smart course discovery · Daily learning tasks",
     pB: "View on Behance",
     n8: "Services",
     nCta: "Let’s talk",
@@ -112,7 +115,7 @@ window.LANG.en = {
     pV: "View case study",
     s1: "hours, UI/UX Design Diploma",
     sF: "hours, Flutter training at NTI Zagazig",
-    s2: "mobile app case studies",
+    s2: "projects",
     s3: "first place, GDG UI/UX competition",
     fH: "Send a message",
     fN: "Name",
@@ -131,7 +134,7 @@ window.LANG.en = {
     thD: "Switch to dark mode",
     altPhoto: "Mohammed Shyiboub Hedhed, UI/UX designer",
     altP1: "Mazaq food delivery app UI/UX screens",
-    altP2: "Skillo e-learning app UI/UX screens",
+    altP2: "LearnVerse e-learning website and student dashboard UI/UX",
   },
   /* ---------- END: interface texts ---------- */
 
@@ -247,7 +250,7 @@ window.LANG.en = {
   /* ---------- START: project tags (pills above each project title) ---------- */
   projectTags: [
     ["Mobile app", "Case study", "UI/UX", "Food delivery"],
-    ["Mobile app", "Case study", "UI/UX", "E-learning"],
+    ["Website", "Dashboard", "Case study", "42 pages"],
   ],
   /* ---------- END: project tags ---------- */
 

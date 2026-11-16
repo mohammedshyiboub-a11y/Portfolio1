@@ -1,6 +1,6 @@
 /* =====================================================================
    intro.js - LIVE intro (built with HTML/CSS/JS, no video file) shown right after the logo splash.
-   Order: logo splash -> curtain opens -> intro plays -> the voice-over starts the moment the final logo screen appears (12.2s) -> "Enter website" button.
+   Order: logo splash -> curtain opens -> intro plays WITH SOUND -> it ends -> "Enter website" button.
    - Sound is never muted. If the browser blocks sound until the visitor touches the page, the intro still
      starts and the voice-over joins (in sync) on the first touch/click/key - no extra screen.
    - The animation is drawn on a 1280x720 (landscape) or 720x1280 (portrait) board that is scaled to fit
@@ -125,8 +125,8 @@
      One continuous clock: it follows the audio while the audio is really playing, and keeps counting on its own
      when the audio is blocked, paused or finished - so starting the sound late never makes the clock jump back. */
   var END_T = 17.3; /* the second the "Enter website" button appears */
-  var VOICE_T = 12.2; /* the second the final logo screen starts to appear - the voice-over starts exactly here */
-  var closed = false, started = false, raf = 0, soundOn = false, synced = false, hint = null, voiceStarted = false, blocked = false;
+  var closed = false, started = false, raf = 0, soundOn = false, synced = false, hint = null;
+  var logoSoundStarted = false, LOGO_T = 12.2; /* play the name exactly when the Mohammed Shyiboub logo appears */
   var ref = { t: 0, p: performance.now() };
   au.src = base + "assets/audio/intro-voice.mp3";
   au.preload = "auto";
@@ -134,12 +134,16 @@
   au.volume = 1;
   function audioPlaying() { return synced && !au.paused && !au.ended && au.currentTime > 0; }
   function now() {
-    if (audioPlaying()) { ref.t = VOICE_T + au.currentTime; ref.p = performance.now(); return ref.t; }
+    if (audioPlaying()) { ref.t = au.currentTime; ref.p = performance.now(); return ref.t; }
     return ref.t + (performance.now() - ref.p) / 1000;
   }
   function jump(t) { ref.t = t; ref.p = performance.now(); }
   function frame() {
     var t = now();
+    if (t >= LOGO_T && !logoSoundStarted && !soundOn) {
+      startLogoSound();
+      if (!soundOn) GEST.forEach(function (ev) { addEventListener(ev, onGesture, { capture: true, passive: true }); });
+    }
     els.forEach(function (e) {
       var a = +e.getAttribute("data-a"), b = e.getAttribute("data-b");
       e.classList.toggle("lv-in", t >= a && (!b || t < +b));
@@ -155,9 +159,9 @@
     if (t >= END_T && !skip.hidden) {
       skip.hidden = true;
       skip.style.display = "none";
+      hideHint();
       try { enter.focus({ preventScroll: true }); } catch (e) {}
     }
-    if (t >= VOICE_T && !voiceStarted && !blocked) playVoiceAfterIntro();
     raf = requestAnimationFrame(frame);
   }
   function run() {
@@ -179,63 +183,50 @@
     setTimeout(function () { au.pause(); box.remove(); }, 700);
   }
 
-  /* ---------- sound: voice-over starts the moment the final logo screen starts to appear (VOICE_T) ---------- */
+  /* ---------- sound ----------
+     Browsers only allow sound after the visitor touches the page. We try at once; if it is blocked the intro still
+     starts, a small "Tap for sound" button (same style as the site buttons) appears, and the FIRST click / tap / key
+     anywhere starts the voice-over exactly where the animation is. We keep trying until the sound really plays. */
   var GEST = ["pointerdown", "mousedown", "touchend", "click", "keydown"];
   function stopWatching() {
     GEST.forEach(function (ev) { removeEventListener(ev, onGesture, true); });
   }
   function hideHint() { if (hint) { hint.remove(); hint = null; } }
   function showHint() {
-    if (hint || soundOn || closed || now() < VOICE_T) return;
+    if (hint || soundOn || closed || now() >= END_T) return;
     hint = document.createElement("button");
     hint.type = "button";
     hint.className = "btn ivsnd2";
     hint.innerHTML = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span>' + tr.sound + "</span>";
-    hint.addEventListener("click", function () { blocked = false; playVoiceAfterIntro(); });
+    hint.addEventListener("click", startLogoSound);
     skip.parentNode.insertBefore(hint, skip);
   }
   function soundStarted() { soundOn = true; stopWatching(); hideHint(); }
-  function playVoiceAfterIntro() {
-    if (closed || !started || voiceStarted || now() < VOICE_T) return;
-    voiceStarted = true;
-    /* if the sound was unlocked late (after the logo screen already appeared), join in sync instead of restarting */
-    var off = now() - VOICE_T;
-    if (au.duration && off >= au.duration - 0.15) { soundStarted(); return; }
-    try { au.currentTime = Math.max(0, off); } catch (e) {}
-    au.muted = false;
+  function startLogoSound() {
+    if (closed || !started || soundOn || now() < LOGO_T) return;
+    logoSoundStarted = true;
+    try { au.currentTime = 0; } catch (e) {}
     var p = au.play();
-    if (p && p.then) p.then(soundStarted, function () {
-      voiceStarted = false;
-      blocked = true; /* stop retrying every frame; the next tap/click/key retries */
-      showHint();
-      GEST.forEach(function (ev) { addEventListener(ev, onGesture, { capture: true, passive: true }); });
-    });
-    else soundStarted();
+    if (p && p.then) p.then(function () {
+      soundOn = true;
+      stopWatching();
+      hideHint();
+    }, showHint);
+    else {
+      soundOn = true;
+      stopWatching();
+      hideHint();
+    }
   }
   function onGesture(e) {
-    blocked = false;
     if (e.type === "keydown" && (e.key === "Escape" || e.key === "Tab" || e.key === "Shift")) return;
     var el = e.target;
-    if (el && el.closest && el.closest("#ivs, #iven")) return;
-    playVoiceAfterIntro();
+    if (el && el.closest && el.closest("#ivs, #iven")) return; /* Skip / Enter: no need for sound */
+    startLogoSound();
   }
   function begin() {
     if (started || closed) return;
-    /* Unlock the audio element during the start-button click, silently.
-       The actual voice-over begins at VOICE_T, when the final logo screen appears. */
-    au.muted = true;
-    var p = au.play();
-    if (p && p.then) p.then(function () {
-      au.pause();
-      try { au.currentTime = 0; } catch (e) {}
-      au.muted = false;
-      run();
-    }, function () {
-      au.muted = false;
-      run();
-      GEST.forEach(function (ev) { addEventListener(ev, onGesture, { capture: true, passive: true }); });
-    });
-    else { au.pause(); au.muted = false; run(); }
+    run(); /* the voice-over waits until the final name/logo screen appears */
   }
   /* ---------- start gate: one centred button the visitor must press, so the voice-over can always play ---------- */
   var gateEl = null;
@@ -263,8 +254,8 @@
     if (closed) return;
     if (!started) run();
     jump(END_T);
+    synced = false;
     au.pause();
-    voiceStarted = true;
     soundOn = true;
     stopWatching();
     hideHint();
